@@ -44,6 +44,7 @@
             this.button1.TabIndex = 0;
             this.button1.Text = "Ingresar";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // textBox2
             // 
@@ -100,6 +101,7 @@
             this.Controls.Add(this.button1);
             this.Name = "Login";
             this.Text = "Login - Uber";
+            this.Load += new System.EventHandler(this.Login_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

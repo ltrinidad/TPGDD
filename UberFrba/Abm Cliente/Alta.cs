@@ -8,16 +8,21 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace UberFrba.Login_Usuario
+namespace UberFrba.Abm_Cliente
 {
-    public partial class Seleccionar_Rol : Form
+    public partial class Alta : Form
     {
-        public Seleccionar_Rol()
+        public Alta()
         {
             InitializeComponent();
         }
 
-        private void Seleccionar_Rol_Load(object sender, EventArgs e)
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label11_Click(object sender, EventArgs e)
         {
 
         }

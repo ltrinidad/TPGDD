@@ -21,5 +21,10 @@ namespace UberFrba.Menu
         {
 
         }
+
+        private void Menu_ABM_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

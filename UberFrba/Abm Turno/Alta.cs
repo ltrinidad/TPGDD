@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace UberFrba.Abm_Chofer
+namespace UberFrba.Abm_Turno
 {
-    public partial class Form1 : Form
+    public partial class Alta : Form
     {
-        public Form1()
+        public Alta()
         {
             InitializeComponent();
         }

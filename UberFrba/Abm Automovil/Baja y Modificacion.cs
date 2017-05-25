@@ -8,13 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace UberFrba.Abm_Cliente
+namespace UberFrba.Abm_Automovil
 {
-    public partial class Form1 : Form
+    public partial class Baja_y_Modificacion : Form
     {
-        public Form1()
+        public Baja_y_Modificacion()
         {
             InitializeComponent();
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

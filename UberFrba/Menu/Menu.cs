@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace UberFrba.NewFolder1
+namespace UberFrba.Menu
 {
     public partial class Menu : Form
     {

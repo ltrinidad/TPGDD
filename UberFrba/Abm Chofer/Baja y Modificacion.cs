@@ -8,18 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace UberFrba.Login_Usuario
+namespace UberFrba.Abm_Chofer
 {
-    public partial class Seleccionar_Rol : Form
+    public partial class Baja_y_Modificacion : Form
     {
-        public Seleccionar_Rol()
+        public Baja_y_Modificacion()
         {
             InitializeComponent();
-        }
-
-        private void Seleccionar_Rol_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

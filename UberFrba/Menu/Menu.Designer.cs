@@ -1,4 +1,4 @@
-﻿namespace UberFrba.NewFolder1
+﻿namespace UberFrba.Menu
 {
     partial class Menu
     {
