@@ -162,7 +162,7 @@
             this.depto,
             this.nroPiso,
             this.dataGridViewButtonColumn1});
-            this.dataGridView2.Location = new System.Drawing.Point(23, 196);
+            this.dataGridView2.Location = new System.Drawing.Point(23, 191);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.Size = new System.Drawing.Size(671, 149);
             this.dataGridView2.TabIndex = 51;
@@ -246,6 +246,7 @@
             this.Controls.Add(this.label1);
             this.Name = "Baja_y_Modificacion";
             this.Text = "Baja y modificacion de chofer";
+            this.Load += new System.EventHandler(this.Baja_y_Modificacion_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

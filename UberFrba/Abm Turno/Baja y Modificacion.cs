@@ -8,26 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace UberFrba.Login_Usuario
+namespace UberFrba.Abm_Turno
 {
-    public partial class Seleccionar_Rol : Form
+    public partial class Baja : Form
     {
-
-        public Seleccionar_Rol()
+        public Baja()
         {
             InitializeComponent();
         }
 
-        private void Seleccionar_Rol_Load(object sender, EventArgs e)
+        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-       
     }
 }

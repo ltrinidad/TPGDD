@@ -16,5 +16,10 @@ namespace UberFrba.Abm_Chofer
         {
             InitializeComponent();
         }
+
+        private void Baja_y_Modificacion_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

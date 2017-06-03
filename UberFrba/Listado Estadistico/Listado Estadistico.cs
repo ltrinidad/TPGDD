@@ -8,26 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace UberFrba.Login_Usuario
+namespace UberFrba.Listado_Estadistico
 {
-    public partial class Seleccionar_Rol : Form
+    public partial class Form2 : Form
     {
-
-        public Seleccionar_Rol()
+        public Form2()
         {
             InitializeComponent();
         }
 
-        private void Seleccionar_Rol_Load(object sender, EventArgs e)
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
 
         }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-       
     }
 }

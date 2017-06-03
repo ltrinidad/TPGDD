@@ -24,7 +24,25 @@ namespace UberFrba.Login_Usuario
 
         private void button1_Click(object sender, EventArgs e)
         {
-           
+           //TODO validar
+            Form seleccionDeRol = new Seleccionar_Rol();
+            seleccionDeRol.Show();
+            this.Close();
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
