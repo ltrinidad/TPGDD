@@ -26,5 +26,10 @@ namespace UberFrba.Menu
         {
 
         }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // si selecciona Alta de automovil, acordarse de pasasrle el texto para el boton ("Crear Automovil") y el flag en true
+        }
     }
 }

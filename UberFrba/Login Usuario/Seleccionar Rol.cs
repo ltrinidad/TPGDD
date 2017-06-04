@@ -28,6 +28,18 @@ namespace UberFrba.Login_Usuario
 
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Form menu = new Menu.Menu(/*PASARLE EL ROL QUE SELECCIONO*/);
+            menu.Show();
+            this.Close();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+        }
+
        
     }
 }

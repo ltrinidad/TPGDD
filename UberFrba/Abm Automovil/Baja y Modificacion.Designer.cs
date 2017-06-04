@@ -28,16 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.modificar = new System.Windows.Forms.Button();
+            this.baja = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.numeroChoferBM = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.patenteBM = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.modeloBM = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.marcaBM = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
@@ -52,23 +52,25 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
-            // button2
+            // modificar
             // 
-            this.button2.Location = new System.Drawing.Point(290, 362);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(117, 23);
-            this.button2.TabIndex = 24;
-            this.button2.Text = "Modificar";
-            this.button2.UseVisualStyleBackColor = true;
+            this.modificar.Location = new System.Drawing.Point(290, 362);
+            this.modificar.Name = "modificar";
+            this.modificar.Size = new System.Drawing.Size(117, 23);
+            this.modificar.TabIndex = 24;
+            this.modificar.Text = "Modificar";
+            this.modificar.UseVisualStyleBackColor = true;
+            this.modificar.Click += new System.EventHandler(this.modificar_Click);
             // 
-            // button1
+            // baja
             // 
-            this.button1.Location = new System.Drawing.Point(164, 362);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(119, 23);
-            this.button1.TabIndex = 23;
-            this.button1.Text = "Dar de Baja";
-            this.button1.UseVisualStyleBackColor = true;
+            this.baja.Location = new System.Drawing.Point(164, 362);
+            this.baja.Name = "baja";
+            this.baja.Size = new System.Drawing.Size(119, 23);
+            this.baja.TabIndex = 23;
+            this.baja.Text = "Dar de Baja";
+            this.baja.UseVisualStyleBackColor = true;
+            this.baja.Click += new System.EventHandler(this.baja_Click);
             // 
             // label4
             // 
@@ -79,12 +81,12 @@
             this.label4.TabIndex = 22;
             this.label4.Text = "Ingrese los campos por los que quiera filtrar :";
             // 
-            // textBox6
+            // numeroChoferBM
             // 
-            this.textBox6.Location = new System.Drawing.Point(506, 78);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(100, 20);
-            this.textBox6.TabIndex = 32;
+            this.numeroChoferBM.Location = new System.Drawing.Point(506, 78);
+            this.numeroChoferBM.Name = "numeroChoferBM";
+            this.numeroChoferBM.Size = new System.Drawing.Size(100, 20);
+            this.numeroChoferBM.TabIndex = 32;
             // 
             // label6
             // 
@@ -95,12 +97,12 @@
             this.label6.TabIndex = 31;
             this.label6.Text = "Número de chofer :";
             // 
-            // textBox4
+            // patenteBM
             // 
-            this.textBox4.Location = new System.Drawing.Point(200, 78);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 20);
-            this.textBox4.TabIndex = 30;
+            this.patenteBM.Location = new System.Drawing.Point(200, 78);
+            this.patenteBM.Name = "patenteBM";
+            this.patenteBM.Size = new System.Drawing.Size(100, 20);
+            this.patenteBM.TabIndex = 30;
             // 
             // label1
             // 
@@ -111,12 +113,12 @@
             this.label1.TabIndex = 29;
             this.label1.Text = "Patente :";
             // 
-            // textBox2
+            // modeloBM
             // 
-            this.textBox2.Location = new System.Drawing.Point(359, 78);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 28;
+            this.modeloBM.Location = new System.Drawing.Point(359, 78);
+            this.modeloBM.Name = "modeloBM";
+            this.modeloBM.Size = new System.Drawing.Size(100, 20);
+            this.modeloBM.TabIndex = 28;
             // 
             // label2
             // 
@@ -127,12 +129,13 @@
             this.label2.TabIndex = 27;
             this.label2.Text = "Modelo :";
             // 
-            // textBox1
+            // marcaBM
             // 
-            this.textBox1.Location = new System.Drawing.Point(52, 78);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 26;
+            this.marcaBM.Location = new System.Drawing.Point(52, 78);
+            this.marcaBM.Name = "marcaBM";
+            this.marcaBM.Size = new System.Drawing.Size(100, 20);
+            this.marcaBM.TabIndex = 26;
+            this.marcaBM.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label3
             // 
@@ -151,6 +154,7 @@
             this.button3.TabIndex = 34;
             this.button3.Text = "Limpiar";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button4
             // 
@@ -225,16 +229,16 @@
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.textBox6);
+            this.Controls.Add(this.numeroChoferBM);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.patenteBM);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.modeloBM);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.marcaBM);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.modificar);
+            this.Controls.Add(this.baja);
             this.Controls.Add(this.label4);
             this.Name = "Baja_y_Modificacion";
             this.Text = "Selección de Automóvil";
@@ -246,16 +250,16 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button modificar;
+        private System.Windows.Forms.Button baja;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox numeroChoferBM;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox patenteBM;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox modeloBM;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox marcaBM;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
