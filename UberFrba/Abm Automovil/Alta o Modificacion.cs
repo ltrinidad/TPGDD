@@ -24,7 +24,7 @@ namespace UberFrba.Abm_Automovil
 
       
 
-        private void button2_Click(object sender, EventArgs e)
+        private void limpiar_Click(object sender, EventArgs e)
         {
             this.marca.ResetText();
             this.turno.ResetText();
@@ -49,12 +49,12 @@ namespace UberFrba.Abm_Automovil
         {
             if (System.Text.RegularExpressions.Regex.IsMatch(numeroChofer.Text, "[^0-9]"))
             {
-                MessageBox.Show("Por favor solo ingrese numeros");
+                MessageBox.Show("Por favor, solo ingrese numeros");
                 numeroChofer.Text = numeroChofer.Text.Remove(numeroChofer.Text.Length - 1);
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void cargar_guardar_Click(object sender, EventArgs e)
         {
             if (!puedeDarDeAlta) { /* hacer update */}
             else { /*hacer insert*/ }
