@@ -60,6 +60,11 @@ namespace UberFrba.Abm_Automovil
             else { /*hacer insert*/ }
         }
 
+        private void Alta_o_Modificacion_Load(object sender, EventArgs e)
+        {
+
+        }
+
       
     }
 }

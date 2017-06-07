@@ -163,6 +163,7 @@
             this.Controls.Add(this.label1);
             this.Name = "Alta_o_Modificacion";
             this.Text = "Alta de automóvil";
+            this.Load += new System.EventHandler(this.Alta_o_Modificacion_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
