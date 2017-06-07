@@ -68,6 +68,7 @@ CREATE TABLE LOS_CHATADROIDES.Cliente
 	fecha_de_nacimiento DATETIME NOT NULL,
 	mail VARCHAR(255),
 	codigo_postal SMALLINT DEFAULT 0,
+	username VARCHAR(20) DEFAULT ('Sin Especificar') FOREIGN KEY REFERENCES LOS_CHATADROIDES.Usuario(username),
 	FOREIGN KEY (localidad, direccion) REFERENCES LOS_CHATADROIDES.Domicilio(localidad, direccion)
 );
 
@@ -82,6 +83,7 @@ CREATE TABLE LOS_CHATADROIDES.Chofer
 	dni NUMERIC(18,0) NOT NULL,
 	fecha_de_nacimiento DATETIME NOT NULL,
 	mail VARCHAR(50),
+	username VARCHAR(20) DEFAULT ('Sin Especificar') FOREIGN KEY REFERENCES LOS_CHATADROIDES.Usuario(username),
 	FOREIGN KEY (localidad, direccion) REFERENCES LOS_CHATADROIDES.Domicilio(localidad, direccion)
 );
 
@@ -96,6 +98,7 @@ CREATE TABLE LOS_CHATADROIDES.Administrador
 	dni NUMERIC(18,0) NOT NULL,
 	fecha_de_nacimiento DATETIME NOT NULL,
 	mail VARCHAR(50),
+	username VARCHAR(20) DEFAULT ('Sin Especificar') FOREIGN KEY REFERENCES LOS_CHATADROIDES.Usuario(username),
 	FOREIGN KEY (localidad, direccion) REFERENCES LOS_CHATADROIDES.Domicilio(localidad, direccion)
 );
 
@@ -103,9 +106,6 @@ CREATE TABLE LOS_CHATADROIDES.Administrador
 CREATE TABLE LOS_CHATADROIDES.Usuario
 (
 	username VARCHAR(20) PRIMARY KEY,
-	telefono_cliente NUMERIC(18,0) FOREIGN KEY REFERENCES LOS_CHATADROIDES.Cliente(telefono),
-	telefono_chofer NUMERIC(18,0) FOREIGN KEY REFERENCES LOS_CHATADROIDES.Chofer(telefono),
-	telefono_admin NUMERIC(18,0) FOREIGN KEY REFERENCES LOS_CHATADROIDES.Administrador(telefono),
 	password VARCHAR(30) NOT NULL,
 	habilitado BIT NOT NULL DEFAULT 1
 );
@@ -326,7 +326,6 @@ END
 
 
 
-
 /*
 CREATE TABLE LOS_CHATADROIDES.Cliente
 (
@@ -341,5 +340,4 @@ CREATE TABLE LOS_CHATADROIDES.Cliente
 	codigo_postal SMALLINT NOT NULL,
 	FOREIGN KEY (localidad, direccion) REFERENCES LOS_CHATADROIDES.Domicilio(localidad, direccion)
 );*/
-
 
