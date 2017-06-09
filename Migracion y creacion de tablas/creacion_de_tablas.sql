@@ -24,6 +24,10 @@ DROP PROCEDURE Cargar_Funcionalidades_X_Rol;
 DROP PROCEDURE Migrar_Clientes;
 DROP PROCEDURE Migrar_Choferes;
 DROP PROCEDURE Asignar_Roles_A_Usuarios; 
+DROP PROCEDURE Migrar_Factura;
+DROP PROCEDURE Migrar_Autos;
+DROP PROCEDURE Migrar_Auto_X_Turno; 
+DROP PROCEDURE Migrar_Rendicion
 */
 
 CREATE TABLE LOS_CHATADROIDES.Usuario--
@@ -157,8 +161,7 @@ CREATE TABLE LOS_CHATADROIDES.Automovil--
 	habilitado BIT NOT NULL DEFAULT 1
 );
 
-
-CREATE TABLE LOS_CHATADROIDES.Auto_X_Turno
+CREATE TABLE LOS_CHATADROIDES.Auto_X_Turno--
 (
 	hora_inicio_turno NUMERIC(18,0),
 	hora_fin_turno NUMERIC(18,0),
@@ -168,14 +171,18 @@ CREATE TABLE LOS_CHATADROIDES.Auto_X_Turno
 );
 
 
-CREATE TABLE LOS_CHATADROIDES.Rendicion
+CREATE TABLE LOS_CHATADROIDES.Rendicion--
 (
 	nro_rendicion NUMERIC(18,0) PRIMARY KEY,
 	fecha DATETIME NOT NULL,
 	telefono_chofer NUMERIC(18,0) NOT NULL FOREIGN KEY REFERENCES LOS_CHATADROIDES.Chofer(telefono),
 	importe_total NUMERIC(18,2) NOT NULL,
-	porcentaje_aplicado FLOAT CHECK(porcentaje_aplicado > 0 AND porcentaje_aplicado <= 1)
+	hora_inicio_turno NUMERIC(18,0),
+	hora_fin_turno NUMERIC(18,0),
+	porcentaje_aplicado FLOAT CHECK(porcentaje_aplicado > 0 AND porcentaje_aplicado <= 1),
+	FOREIGN KEY (hora_inicio_turno, hora_fin_turno) REFERENCES LOS_CHATADROIDES.Turno(hora_inicio_turno, hora_fin_turno)
 );  
+
 
 
 CREATE TABLE LOS_CHATADROIDES.Viaje
@@ -194,26 +201,21 @@ CREATE TABLE LOS_CHATADROIDES.Viaje
 	FOREIGN KEY (hora_inicio_turno, hora_fin_turno) REFERENCES LOS_CHATADROIDES.Turno(hora_inicio_turno, hora_fin_turno)
 );
 
-/*
-Intento de query para ver si un viaje tiene un registro para cuando empezo y otro para cuando termino:
 
-SELECT M1.Chofer_Nombre, M2.Chofer_Nombre, M1.Cliente_Nombre, M2.Cliente_Nombre, M1.Viaje_Fecha, M2.Viaje_Fecha
-FROM gd_esquema.Maestra M1 JOIN gd_esquema.Maestra M2
-	ON(CONVERT(date, M1.Viaje_Fecha) = CONVERT(date, M2.Viaje_Fecha) 
-		AND M1.Chofer_Nombre = M2.Chofer_Nombre
-		AND M1.Chofer_Apellido = M2.Chofer_Apellido
-		AND M1.Cliente_Nombre = M2.Cliente_Nombre
-		AND M1.Cliente_Apellido = M2.Cliente_Apellido
-		AND M1.Turno_Hora_Inicio = M2.Turno_Hora_Inicio
-		AND M1.Auto_Patente = M2.Auto_Patente)
-where CONVERT(time, M1.Viaje_Fecha) < CONVERT(time, M2.Viaje_Fecha)
-ORDER BY 5, 6
-*/
-
-/*  -------------------------------------------------------- MIGRACION  --------------------------------------------------------  */
+SELECT M1.Chofer_Telefono, M2.Cliente_Telefono, M1.Viaje_Fecha AS fecha1, M2.Viaje_Fecha AS fecha2
+  				FROM gd_esquema.Maestra M1 JOIN gd_esquema.Maestra M2
+      			ON(CONVERT(date, M1.Viaje_Fecha) = CONVERT(date, M2.Viaje_Fecha)
+       			 AND M1.Chofer_Telefono = M2.Chofer_Telefono
+     			   AND M1.Cliente_Telefono = M2.Cliente_Telefono
+     			   AND M1.Turno_Hora_Inicio = M2.Turno_Hora_Inicio
+             AND M1.Auto_Patente = M2.Auto_Patente)
+ 					WHERE CONVERT(time, M1.Viaje_Fecha) < CONVERT(time, M2.Viaje_Fecha)
+  				GROUP BY M1.Chofer_Telefono, M2.Cliente_Telefono, M1.Viaje_Fecha, M2.Viaje_Fecha
+  			  ORDER BY M2.Viaje_Fecha ASC
+/*  -------------------------------------------------------- MIGRACION --------------------------------------------------------  */
 
 -- Cargar tabla Domicilio
-CREATE PROCEDURE Migrar_Domicilios
+CREATE PROCEDURE LOS_CHATADROIDES.Migrar_Domicilios
 AS
 BEGIN 
 	 DECLARE direccion CURSOR FOR 
@@ -245,7 +247,7 @@ select * from LOS_CHATADROIDES.Domicilio;
 */
 
 -- Cargar tabla Turno
-CREATE PROCEDURE Migrar_Turnos
+CREATE PROCEDURE LOS_CHATADROIDES.Migrar_Turnos
 AS
 BEGIN
 	DECLARE turnos_cursor CURSOR FOR
@@ -274,7 +276,7 @@ END
 
 
 -- Cargar tabla Funcionalidad_X_Rol
-CREATE PROCEDURE Cargar_Funcionalidades_X_Rol
+CREATE PROCEDURE LOS_CHATADROIDES.Cargar_Funcionalidades_X_Rol
 AS
 BEGIN
 	DECLARE funcs_cursor CURSOR FOR
@@ -299,7 +301,7 @@ END
 
 -- Cargar tabla Cliente
 -- Ponerle el nombre de usuario como nombre + apellido
-CREATE PROCEDURE Migrar_Clientes
+CREATE PROCEDURE LOS_CHATADROIDES.Migrar_Clientes
 AS
 BEGIN
 	DECLARE clientes_cursor CURSOR FOR
@@ -346,7 +348,7 @@ BEGIN
 		DEALLOCATE clientes_cursor;
 END
 
-CREATE PROCEDURE Migrar_Choferes
+CREATE PROCEDURE LOS_CHATADROIDES.Migrar_Choferes
 AS
 BEGIN
 	DECLARE choferes_cursor CURSOR FOR
@@ -382,7 +384,7 @@ BEGIN
 		DEALLOCATE choferes_cursor;
 END
 		
-CREATE PROCEDURE Asignar_Roles_A_Usuarios
+CREATE PROCEDURE LOS_CHATADROIDES.Asignar_Roles_A_Usuarios
 AS
 BEGIN
 	INSERT INTO LOS_CHATADROIDES.Rol_X_Usuario (username, nombre_del_rol) VALUES ('admin', 'Administrador')
@@ -421,7 +423,7 @@ BEGIN
 	DEALLOCATE chofer_cursor
 END; 
 
-CREATE PROCEDURE Migrar_Factura
+CREATE PROCEDURE LOS_CHATADROIDES.Migrar_Factura
 AS
 BEGIN
 	
@@ -455,7 +457,7 @@ BEGIN
 END;
 
 
-CREATE PROCEDURE Migrar_Autos
+CREATE PROCEDURE LOS_CHATADROIDES.Migrar_Autos
 AS
 BEGIN
 	DECLARE autos_cursor CURSOR FOR
@@ -486,10 +488,70 @@ BEGIN
 END
 
 
+CREATE PROCEDURE LOS_CHATADROIDES.Migrar_Auto_X_Turno
+AS
+BEGIN
+
+	DECLARE auto_x_turno_cursor CURSOR FOR
+	SELECT Turno_Hora_Inicio ,Turno_Hora_Fin, Auto_Patente FROM gd_esquema.Maestra
+	GROUP BY Turno_Hora_Inicio, Turno_Hora_Fin, Auto_Patente
+
+	DECLARE @turno_hora_inicio NUMERIC (18,0)
+	DECLARE @turno_hora_fin NUMERIC (18,0)
+	DECLARE @auto_patente VARCHAR(10)
+
+	OPEN auto_x_turno_cursor
+	FETCH auto_x_turno_cursor INTO @turno_hora_inicio, @turno_hora_fin, @auto_patente
+
+	WHILE(@@FETCH_STATUS = 0)
+		BEGIN
+			INSERT INTO LOS_CHATADROIDES.Auto_X_Turno (hora_inicio_turno, hora_fin_turno, patente)
+				VALUES (@turno_hora_inicio, @turno_hora_fin, @auto_patente)
+			FETCH auto_x_turno_cursor INTO @turno_hora_inicio, @turno_hora_fin, @auto_patente
+		END;
+	CLOSE auto_x_turno_cursor
+	DEALLOCATE auto_x_turno_cursor
+END;
+			
+ 
+CREATE PROCEDURE LOS_CHATADROIDES.Migrar_Rendicion
+AS
+BEGIN
+	DECLARE rendicion_cursor CURSOR FOR
+	SELECT Rendicion_Nro, Rendicion_Fecha, SUM(Rendicion_Importe) importe_total, Turno_Hora_Inicio, Turno_Hora_Fin, Chofer_Telefono 
+	FROM gd_esquema.Maestra
+	GROUP BY Rendicion_Nro, Rendicion_Fecha, Turno_Hora_Inicio, Turno_Hora_Fin, Chofer_Telefono
+	HAVING Rendicion_Nro IS NOT NULL
+  
+  DECLARE @rendicion_nro NUMERIC(18,0)
+  DECLARE @fecha DATETIME
+  DECLARE @importe_total NUMERIC(18,2)
+  DECLARE @hora_inicio NUMERIC(18,0)
+  DECLARE @hora_fin NUMERIC(18,0)
+  DECLARE @chofer_telefono NUMERIC(18,0)
+ 
+ 	OPEN rendicion_cursor
+  FETCH rendicion_cursor INTO @rendicion_nro, @fecha, @importe_total, @hora_inicio, @hora_fin, @chofer_telefono
+  
+  WHILE(@@FETCH_STATUS = 0)
+  BEGIN
+		INSERT INTO LOS_CHATADROIDES.Rendicion (nro_rendicion, fecha, telefono_chofer, importe_total, hora_inicio_turno, hora_fin_turno, porcentaje_aplicado)
+    	VALUES ( @rendicion_nro, @fecha, @chofer_telefono, @importe_total, @hora_inicio, @hora_fin, 0.3)
+
+		FETCH rendicion_cursor INTO @rendicion_nro, @fecha, @importe_total, @hora_inicio, @hora_fin, @chofer_telefono
+  END
+  
+  CLOSE rendicion_cursor
+	DEALLOCATE rendicion_cursor
+END;  
+ 
+ 
+
+	
 /*  -------------------------------------------------------- SCRIPT DE MIGRACION --------------------------------------------------------  */
 
-EXEC Migrar_Domicilios;
-EXEC Migrar_Turnos;
+EXEC LOS_CHATADROIDES.Migrar_Domicilios;
+EXEC LOS_CHATADROIDES.Migrar_Turnos;
 
 INSERT INTO LOS_CHATADROIDES.Rol (nombre_del_rol) VALUES ('Chofer');
 INSERT INTO LOS_CHATADROIDES.Rol (nombre_del_rol) VALUES ('Cliente');
@@ -506,9 +568,9 @@ INSERT INTO LOS_CHATADROIDES.Funcionalidad (descripcion) VALUES ('Rendicion de c
 INSERT INTO LOS_CHATADROIDES.Funcionalidad (descripcion) VALUES ('Listado Estadistico');
 INSERT INTO LOS_CHATADROIDES.Funcionalidad (descripcion) VALUES ('Facturacion a Cliente');
 
-EXEC Cargar_Funcionalidades_X_Rol;
-EXEC Migrar_Clientes;
-EXEC Migrar_Choferes;
+EXEC LOS_CHATADROIDES.Cargar_Funcionalidades_X_Rol;
+EXEC LOS_CHATADROIDES.Migrar_Clientes;
+EXEC LOS_CHATADROIDES.Migrar_Choferes;
 
 INSERT INTO LOS_CHATADROIDES.Usuario
 	(username, password) VALUES ('admin', 'w23e')
@@ -517,6 +579,434 @@ INSERT INTO LOS_CHATADROIDES.Administrador
 	(telefono, direccion, nombre, apellido, dni, fecha_de_nacimiento, mail, username) VALUES
 		(1, '25 de Mayo 5619', 'Quique', 'Reinosa', 1, '1966-01-01', 'chakl@hotmail.com', 'admin')
 	
-EXEC Asignar_Roles_A_Usuarios;--cambiar nombre a cargar roles x usuario
-EXEC Migrar_Factura;
-EXEC Migrar_Autos;
+EXEC LOS_CHATADROIDES.Asignar_Roles_A_Usuarios;--cambiar nombre a cargar roles x usuario
+EXEC LOS_CHATADROIDES.Migrar_Factura;
+EXEC LOS_CHATADROIDES.Migrar_Autos;
+EXEC LOS_CHATADROIDES.Migrar_Auto_X_Turno
+EXEC LOS_CHATADROIDES.Migrar_Rendicion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT * FROM LOS_CHATADROIDES.Viaje
+
+
+
+DROP TABLE LOS_CHATADROIDES.#Viajes_con_inicio_y_fin
+
+DELETE FROM LOS_CHATADROIDES.Viaje
+
+ DROP TABLE LOS_CHATADROIDES.Viaje
+ DROP PROCEDURE LOS_CHATADROIDES.Migrar_ViajesV2
+EXEC LOS_CHATADROIDES.Migrar_Viajes
+
+
+
+
+CREATE PROCEDURE LOS_CHATADROIDES.Migrar_Viajes
+AS
+BEGIN
+	
+	SELECT M1.Chofer_Telefono AS chofer, M2.Cliente_Telefono AS cliente, M1.Viaje_Fecha AS fecha1, M2.Viaje_Fecha AS fecha2
+	INTO LOS_CHATADROIDES.#Viajes_con_inicio_y_fin
+	FROM gd_esquema.Maestra M1 LEFT JOIN gd_esquema.Maestra M2
+	  	ON(CONVERT(date, M1.Viaje_Fecha) = CONVERT(date, M2.Viaje_Fecha)
+    		AND M1.Chofer_Telefono = M2.Chofer_Telefono
+			AND M1.Cliente_Telefono = M2.Cliente_Telefono
+     		AND M1.Turno_Hora_Inicio = M2.Turno_Hora_Inicio
+			AND M1.Auto_Patente = M2.Auto_Patente)
+	WHERE CONVERT(time, M1.Viaje_Fecha) < CONVERT(time, M2.Viaje_Fecha)
+	GROUP BY M1.Chofer_Telefono, M2.Cliente_Telefono, M1.Viaje_Fecha, M2.Viaje_Fecha
+	ORDER BY M2.Viaje_Fecha ASC
+	
+	DECLARE viajes_cursor CURSOR FOR
+	SELECT Rendicion_Nro, Chofer_Telefono, Auto_Patente, Factura_Nro, Cliente_Telefono, Turno_Hora_Inicio, Turno_Hora_Fin, fecha1, fecha_y_hora_fin, Viaje_Cant_Kilometros
+	FROM gd_esquema.Maestra m
+		JOIN (
+				SELECT chofer, cliente, fecha1, MIN(fecha2) as fecha_y_hora_fin 
+					FROM LOS_CHATADROIDES.#Viajes_con_inicio_y_fin 
+					GROUP BY chofer, cliente, fecha1 
+			 ) fechas
+		 on (fechas.chofer = m.Chofer_Telefono AND fechas.cliente = m.Cliente_Telefono)
+		 
+	GROUP BY Rendicion_Nro, Chofer_Telefono, Auto_Patente, Factura_Nro, Cliente_Telefono, Turno_Hora_Inicio, Turno_Hora_Fin, fecha1, fecha_y_hora_fin, Viaje_Cant_Kilometros
+
+	DECLARE @rendicion_nro NUMERIC(18,0)
+	DECLARE @telefono_chofer NUMERIC(18,0)
+	DECLARE @patente VARCHAR(10)
+	DECLARE @factura_nro NUMERIC(18,0)
+	DECLARE @telefono_cliente NUMERIC(18,0)
+	DECLARE @turno_hora_inicio NUMERIC(18,0)
+	DECLARE @turno_hora_fin NUMERIC(18,0)
+	DECLARE @fecha_y_hora_inicio DATETIME
+	DECLARE @fecha_y_hora_fin DATETIME
+	DECLARE @km_del_viaje NUMERIC(18,0)
+	/*CLI 4802842
+	CHOF 5000605
+	FECHA '2015-01-02 17:00:00.000'*/
+	OPEN viajes_cursor
+	FETCH viajes_cursor INTO 
+		@rendicion_nro, @telefono_chofer, @patente, @factura_nro, @telefono_cliente, @turno_hora_inicio, @turno_hora_fin, @fecha_y_hora_inicio, @fecha_y_hora_fin, @km_del_viaje 
+
+	WHILE (@@FETCH_STATUS = 0)
+  	BEGIN
+     
+    	INSERT INTO LOS_CHATADROIDES.Viaje (nro_rendicion, 
+											telefono_chofer, 
+											patente, 
+											id_factura, 
+											telefono_cliente, 
+											hora_inicio_turno, 
+											hora_fin_turno, 
+											fecha_y_hora_inicio_viaje, 
+											fecha_y_hora_fin_viaje, 
+											kilometros_del_viaje)
+
+      								VALUES (@rendicion_nro,
+											@telefono_chofer,
+											@patente, 
+											@factura_nro, 
+											@telefono_cliente,
+											@turno_hora_inicio,
+											@turno_hora_fin,
+											@fecha_y_hora_inicio, 
+											@fecha_y_hora_fin,
+											@km_del_viaje)
+    		
+		FETCH viajes_cursor INTO 
+  			@rendicion_nro, @telefono_chofer, @patente, @factura_nro, @telefono_cliente, @turno_hora_inicio, @turno_hora_fin, @fecha_y_hora_inicio, @fecha_y_hora_fin, @km_del_viaje 
+        
+	END 
+    
+	CLOSE viajes_cursor;
+	DEALLOCATE viajes_cursor;
+END
+
+delete from LOS_CHATADROIDES.Viaje
+select * from LOS_CHATADROIDES.Viaje WHERE telefono_chofer = 7643409 and telefono_cliente = 5085801
+drop table LOS_CHATADROIDES.#Viajes_con_inicio_y_fin
+exec LOS_CHATADROIDES.Migrar_ViajesV1
+	01:23
+CREATE PROCEDURE LOS_CHATADROIDES.Migrar_ViajesV1
+AS
+BEGIN
+	DECLARE viajes_cursor CURSOR FOR
+	SELECT Rendicion_Nro, Chofer_Telefono, Auto_Patente, Factura_Nro, Cliente_Telefono, Turno_Hora_Inicio, Turno_Hora_Fin, Viaje_Fecha, Viaje_Cant_Kilometros
+	FROM gd_esquema.Maestra
+	GROUP BY Rendicion_Nro, Chofer_Telefono, Auto_Patente, Factura_Nro, Cliente_Telefono, Turno_Hora_Inicio, Turno_Hora_Fin, Viaje_Fecha, Viaje_Cant_Kilometros
+
+	DECLARE @rendicion_nro NUMERIC(18,0)
+	DECLARE @telefono_chofer NUMERIC(18,0)
+	DECLARE @patente VARCHAR(10)
+	DECLARE @factura_nro NUMERIC(18,0)
+	DECLARE @telefono_cliente NUMERIC(18,0)
+	DECLARE @turno_hora_inicio NUMERIC(18,0)
+	DECLARE @turno_hora_fin NUMERIC(18,0)
+	DECLARE @fecha_y_hora_inicio DATETIME
+	DECLARE @fecha_y_hora_fin DATETIME
+	DECLARE @km_del_viaje NUMERIC(18,0)
+	
+	OPEN viajes_cursor
+	FETCH viajes_cursor INTO 
+  	@rendicion_nro, @telefono_chofer, @patente, @factura_nro, @telefono_cliente, @turno_hora_inicio, @turno_hora_fin, @fecha_y_hora_inicio, @km_del_viaje 
+	
+	SELECT chofer, cliente, fecha1, MIN(fecha2) AS fecha2
+	INTO LOS_CHATADROIDES.#Viajes_con_inicio_y_fin
+	FROM (
+	SELECT M1.Chofer_Telefono AS chofer, M2.Cliente_Telefono AS cliente, M1.Viaje_Fecha AS fecha1, M2.Viaje_Fecha AS fecha2
+	FROM gd_esquema.Maestra M1 JOIN gd_esquema.Maestra M2
+	  	ON(CONVERT(date, M1.Viaje_Fecha) = CONVERT(date, M2.Viaje_Fecha)
+    		AND M1.Chofer_Telefono = M2.Chofer_Telefono
+			AND M1.Cliente_Telefono = M2.Cliente_Telefono
+     		AND M1.Turno_Hora_Inicio = M2.Turno_Hora_Inicio
+			AND M1.Auto_Patente = M2.Auto_Patente)
+	WHERE CONVERT(time, M1.Viaje_Fecha) < CONVERT(time, M2.Viaje_Fecha)
+	GROUP BY M1.Chofer_Telefono, M2.Cliente_Telefono, M1.Viaje_Fecha, M2.Viaje_Fecha
+	) AS T
+	GROUP BY chofer, cliente, fecha1 
+
+	--SELECT * FROM LOS_CHATADROIDES.#Viajes_con_inicio_y_fin
+  
+	WHILE (@@FETCH_STATUS = 0)
+  	BEGIN						
+    	SET @fecha_y_hora_fin = (SELECT fecha2
+      								FROM LOS_CHATADROIDES.#Viajes_con_inicio_y_fin 
+									WHERE chofer = @telefono_chofer
+                              			AND cliente = @telefono_cliente
+                               			AND fecha1 = @fecha_y_hora_inicio);
+     if(@fecha_y_hora_fin IS NOT NULL)
+	 BEGIN
+    	INSERT INTO LOS_CHATADROIDES.Viaje (nro_rendicion, 
+											telefono_chofer, 
+											patente, 
+											id_factura, 
+											telefono_cliente, 
+											hora_inicio_turno, 
+											hora_fin_turno, 
+											fecha_y_hora_inicio_viaje, 
+											fecha_y_hora_fin_viaje, 
+											kilometros_del_viaje)
+      	VALUES (@rendicion_nro,
+				@telefono_chofer,
+				@patente, 
+				@factura_nro, 
+				@telefono_cliente,
+				@turno_hora_inicio,
+				@turno_hora_fin,
+				@fecha_y_hora_inicio, 
+				@fecha_y_hora_fin,
+				@km_del_viaje)
+    		END
+		FETCH viajes_cursor INTO
+		@rendicion_nro, @telefono_chofer, @patente, @factura_nro, @telefono_cliente, @turno_hora_inicio, @turno_hora_fin, @fecha_y_hora_inicio, @km_del_viaje 
+        
+	END 
+    
+	CLOSE viajes_cursor;
+	DEALLOCATE viajes_cursor;
+END
+SELECT * FROM LOS_CHATADROIDES.Viaje
+
+DELETE FROM LOS_CHATADROIDES.Viaje
+EXEC LOS_CHATADROIDES.Migrar_ViajesV2
+CREATE PROCEDURE LOS_CHATADROIDES.Migrar_ViajesV2
+AS
+BEGIN
+	
+	SELECT M1.Chofer_Telefono AS chofer, M2.Cliente_Telefono AS cliente, M1.Viaje_Fecha AS fecha1, M2.Viaje_Fecha AS fecha2
+	INTO LOS_CHATADROIDES.#Viajes_con_inicio_y_fin
+	FROM gd_esquema.Maestra M1 LEFT JOIN gd_esquema.Maestra M2
+	  	ON(CONVERT(date, M1.Viaje_Fecha) = CONVERT(date, M2.Viaje_Fecha)
+    		AND M1.Chofer_Telefono = M2.Chofer_Telefono
+			AND M1.Cliente_Telefono = M2.Cliente_Telefono
+     		AND M1.Turno_Hora_Inicio = M2.Turno_Hora_Inicio
+			AND M1.Auto_Patente = M2.Auto_Patente)
+	WHERE CONVERT(time, M1.Viaje_Fecha) < CONVERT(time, M2.Viaje_Fecha)
+	GROUP BY M1.Chofer_Telefono, M2.Cliente_Telefono, M1.Viaje_Fecha, M2.Viaje_Fecha
+	ORDER BY M2.Viaje_Fecha ASC
+	/*
+	DECLARE viajes_cursor CURSOR FOR
+	SELECT Rendicion_Nro, Chofer_Telefono, Auto_Patente, Factura_Nro, Cliente_Telefono, Turno_Hora_Inicio, Turno_Hora_Fin, fecha_y_hora_inicio, fecha_y_hora_fin, Viaje_Cant_Kilometros
+	FROM (
+		SELECT chofer, cliente, fecha1 AS fecha_y_hora_inicio, MIN(fecha2) as fecha_y_hora_fin 
+		FROM LOS_CHATADROIDES.#Viajes_con_inicio_y_fin 
+		GROUP BY chofer, cliente, fecha1 ) AS T 
+			JOIN 
+		(
+		SELECT Rendicion_Nro, Chofer_Telefono, Auto_Patente, Factura_Nro, Cliente_Telefono, Turno_Hora_Inicio, 
+			Turno_Hora_Fin, Viaje_Fecha, Viaje_Cant_Kilometros
+		FROM gd_esquema.Maestra
+		GROUP BY Rendicion_Nro, Chofer_Telefono, Auto_Patente, Factura_Nro, Cliente_Telefono, Turno_Hora_Inicio, 
+		Turno_Hora_Fin, Viaje_Fecha, Viaje_Cant_Kilometros
+	) AS M
+		ON(M.Chofer_Telefono = T.chofer AND M.Cliente_Telefono = T.cliente AND M.Viaje_Fecha = T.fecha_y_hora_inicio)
+	GROUP BY Rendicion_Nro, Chofer_Telefono, Auto_Patente, Factura_Nro, Cliente_Telefono, Turno_Hora_Inicio, Turno_Hora_Fin, fecha_y_hora_inicio, fecha_y_hora_fin, Viaje_Cant_Kilometros
+	*/
+	DECLARE viajes_cursor CURSOR FOR
+	SELECT Chofer_Telefono, Auto_Patente, Cliente_Telefono, Turno_Hora_Inicio, Turno_Hora_Fin, fecha_y_hora_inicio, fecha_y_hora_fin, Viaje_Cant_Kilometros
+	FROM (
+		SELECT chofer, cliente, fecha1 AS fecha_y_hora_inicio, MIN(fecha2) as fecha_y_hora_fin 
+		FROM LOS_CHATADROIDES.#Viajes_con_inicio_y_fin 
+		GROUP BY chofer, cliente, fecha1 ) AS T 
+			JOIN 
+		(
+		SELECT Rendicion_Nro, Chofer_Telefono, Auto_Patente, Factura_Nro, Cliente_Telefono, Turno_Hora_Inicio, 
+			Turno_Hora_Fin, Viaje_Fecha, Viaje_Cant_Kilometros
+		FROM gd_esquema.Maestra
+		GROUP BY Rendicion_Nro, Chofer_Telefono, Auto_Patente, Factura_Nro, Cliente_Telefono, Turno_Hora_Inicio, 
+		Turno_Hora_Fin, Viaje_Fecha, Viaje_Cant_Kilometros
+		ORDER BY 2, 5, 8) AS M
+		ON(M.Chofer_Telefono = T.chofer AND M.Cliente_Telefono = T.cliente AND M.Viaje_Fecha = T.fecha_y_hora_inicio)
+	GROUP BY Chofer_Telefono, Auto_Patente, Cliente_Telefono, Turno_Hora_Inicio, Turno_Hora_Fin, fecha_y_hora_inicio, fecha_y_hora_fin, Viaje_Cant_Kilometros
+
+	DECLARE @rendicion_nro NUMERIC(18,0)
+	DECLARE @telefono_chofer NUMERIC(18,0)
+	DECLARE @patente VARCHAR(10)
+	DECLARE @factura_nro NUMERIC(18,0)
+	DECLARE @telefono_cliente NUMERIC(18,0)
+	DECLARE @turno_hora_inicio NUMERIC(18,0)
+	DECLARE @turno_hora_fin NUMERIC(18,0)
+	DECLARE @fecha_y_hora_inicio DATETIME
+	DECLARE @fecha_y_hora_fin DATETIME
+	DECLARE @km_del_viaje NUMERIC(18,0)
+	
+	OPEN viajes_cursor
+	FETCH viajes_cursor INTO 
+		@rendicion_nro, @telefono_chofer, @patente, @factura_nro, @telefono_cliente, @turno_hora_inicio, @turno_hora_fin, @fecha_y_hora_inicio, @fecha_y_hora_fin, @km_del_viaje 
+
+	WHILE (@@FETCH_STATUS = 0)
+  	BEGIN
+     
+    	INSERT INTO LOS_CHATADROIDES.Viaje (nro_rendicion, 
+											telefono_chofer, 
+											patente, 
+											id_factura, 
+											telefono_cliente, 
+											hora_inicio_turno, 
+											hora_fin_turno, 
+											fecha_y_hora_inicio_viaje, 
+											fecha_y_hora_fin_viaje, 
+											kilometros_del_viaje)
+
+      								VALUES (@rendicion_nro,
+											@telefono_chofer,
+											@patente, 
+											@factura_nro, 
+											@telefono_cliente,
+											@turno_hora_inicio,
+											@turno_hora_fin,
+											@fecha_y_hora_inicio, 
+											@fecha_y_hora_fin,
+											@km_del_viaje)
+    		
+		FETCH viajes_cursor INTO 
+  			@rendicion_nro, @telefono_chofer, @patente, @factura_nro, @telefono_cliente, @turno_hora_inicio, @turno_hora_fin, @fecha_y_hora_inicio, @fecha_y_hora_fin, @km_del_viaje 
+        
+	END 
+    
+	CLOSE viajes_cursor;
+	DEALLOCATE viajes_cursor;
+END
+
+
+
+
+
+
+
+
+select count(*) from LOS_CHATADROIDES.#Viajes_con_inicio_y_fin 
+
+
+
+
+
+
+
+  SELECT Rendicion_Nro, Chofer_Telefono, Auto_Patente, Factura_Nro, Cliente_Telefono, Turno_Hora_Inicio, Turno_Hora_Fin, fecha_y_hora_inicio, fecha_y_hora_fin, Viaje_Cant_Kilometros
+                  FROM (
+                    SELECT chofer, cliente, fecha1 AS fecha_y_hora_inicio, MIN(fecha2) as fecha_y_hora_fin 
+                    FROM LOS_CHATADROIDES.#Viajes_con_inicio_y_fin 
+                    GROUP BY chofer, cliente, fecha1 ) AS T 
+                      JOIN 
+                    (
+                    SELECT Rendicion_Nro, Chofer_Telefono, Auto_Patente, Factura_Nro, Cliente_Telefono, Turno_Hora_Inicio, 
+                      Turno_Hora_Fin, Viaje_Fecha, Viaje_Cant_Kilometros
+                    FROM gd_esquema.Maestra
+                    GROUP BY Rendicion_Nro, Chofer_Telefono, Auto_Patente, Factura_Nro, Cliente_Telefono, Turno_Hora_Inicio, 
+                    Turno_Hora_Fin, Viaje_Fecha, Viaje_Cant_Kilometros
+                  ) AS M
+                    ON(M.Chofer_Telefono = T.chofer AND M.Cliente_Telefono = T.cliente AND M.Viaje_Fecha = T.fecha_y_hora_inicio)
+                  WHERE Rendicion_Nro NOT EXISTS (
+                  												  	SELECT Rendicion_Nro
+                                              FROM gd_esquema.Maestra m 
+                                              WHERE m.Rendicion_Nro != Rendicion_Nro
+                                              	AND m.Cliente_Telefono = Cliente_Telefono
+                                                AND m.Chofer_Telefono = Chofer_Telefono
+                                            )
+                  			AND Factura_Nro NOT EXISTS(
+                                                  SELECT Factura_Nro
+                                                  FROM gd_esquema.Maestra m 
+                                                  WHERE m.Factura_Nro != Factura_Nro
+                                                    AND m.Cliente_Telefono = Cliente_Telefono
+                                                    AND m.Chofer_Telefono = Chofer_Telefono
+                                                )
+                  GROUP BY Rendicion_Nro, Chofer_Telefono, Auto_Patente, Factura_Nro, Cliente_Telefono, Turno_Hora_Inicio, Turno_Hora_Fin, fecha_y_hora_inicio, fecha_y_hora_fin, Viaje_Cant_Kilometros
+                  
+
+SELECT M.Chofer_Telefono, M.Auto_Patente, M.Cliente_Telefono, M.Turno_Hora_Inicio, M.Turno_Hora_Fin, fecha_y_hora_inicio, fecha_y_hora_fin, N.Viaje_Cant_Kilometros, M.Rendicion_Nro, P.Factura_Nro
+	FROM (
+		SELECT chofer, cliente, fecha1 AS fecha_y_hora_inicio, MIN(fecha2) as fecha_y_hora_fin 
+		FROM LOS_CHATADROIDES.#Viajes_con_inicio_y_fin 
+		GROUP BY chofer, cliente, fecha1 ) AS T 
+			JOIN 
+		(
+		SELECT Chofer_Telefono, Auto_Patente, Cliente_Telefono, Turno_Hora_Inicio, 
+			Turno_Hora_Fin, Viaje_Fecha, Viaje_Cant_Kilometros
+		FROM gd_esquema.Maestra
+		GROUP BY Chofer_Telefono, Auto_Patente, Cliente_Telefono, Turno_Hora_Inicio, 
+		Turno_Hora_Fin, Viaje_Fecha, Viaje_Cant_Kilometros
+		) AS N
+		ON(N.Chofer_Telefono = T.chofer AND N.Cliente_Telefono = T.cliente AND T.fecha_y_hora_inicio = N.Viaje_Fecha)
+			LEFT JOIN
+		(
+		SELECT Rendicion_Nro, Chofer_Telefono, Auto_Patente, Cliente_Telefono, Turno_Hora_Inicio, 
+			Turno_Hora_Fin, Viaje_Fecha
+		FROM gd_esquema.Maestra
+		GROUP BY Rendicion_Nro, Chofer_Telefono, Auto_Patente, Cliente_Telefono, Turno_Hora_Inicio, 
+		Turno_Hora_Fin, Viaje_Fecha
+		HAVING Rendicion_Nro is not null
+		) AS M
+		ON(M.Chofer_Telefono = N.Chofer_Telefono AND M.Cliente_Telefono = N.Cliente_Telefono  AND M.Viaje_Fecha = N.Viaje_Fecha)
+			LEFT JOIN
+		(
+		SELECT Chofer_Telefono, Auto_Patente, Factura_Nro, Cliente_Telefono, Turno_Hora_Inicio, 
+			Turno_Hora_Fin, Viaje_Fecha
+		FROM gd_esquema.Maestra
+		GROUP BY Chofer_Telefono, Auto_Patente, Factura_Nro, Cliente_Telefono, Turno_Hora_Inicio, 
+		Turno_Hora_Fin, Viaje_Fecha
+		HAVING Factura_Nro is not null
+		) AS P
+		ON(P.Chofer_Telefono = M.Chofer_Telefono AND P.Cliente_Telefono = M.Cliente_Telefono AND P.Viaje_Fecha = M.Viaje_Fecha)
+	group by M.Chofer_Telefono, M.Auto_Patente, M.Cliente_Telefono, M.Turno_Hora_Inicio, M.Turno_Hora_Fin, fecha_y_hora_inicio, fecha_y_hora_fin, N.Viaje_Cant_Kilometros, M.Rendicion_Nro, P.Factura_Nro
+	order by 9, 10
+
+
+
+
+
+
+	select * from gd_esquema.Maestra where Chofer_Telefono = 7024909 and Cliente_Telefono = 5237919 and Viaje_Fecha = '2015-02-17 11:00:00.000'
+
+
+	select count(Factura_Nro)
+	from gd_esquema.Maestra
+	group by Cliente_Telefono, Chofer_Telefono, Viaje_Fecha
+
+
+
+
+
+
+
+
+
+	
+select Cliente_Telefono, Chofer_Telefono
+FROM gd_esquema.Maestra
+
+
+
+/* VAMOS A SUMAR LOS KM PORQUE SON LOS QUE TARDAN EN IRTE A BUSCAR Y LOS QUE TARDAN EN LLEVARTE AL LUGAR */
