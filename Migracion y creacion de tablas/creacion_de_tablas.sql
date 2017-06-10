@@ -16,7 +16,6 @@ DROP TABLE LOS_CHATADROIDES.Turno;
 DROP TABLE LOS_CHATADROIDES.Usuario;
 */
 
-
 /*
 DELETE FROM LOS_CHATADROIDES.Administrador;
 DELETE FROM LOS_CHATADROIDES.Funcionalidad_X_Rol;
@@ -42,24 +41,30 @@ DROP PROCEDURE LOS_CHATADROIDES.Migrar_Turnos;
 DROP PROCEDURE LOS_CHATADROIDES.Cargar_Funcionalidades_X_Rol;
 DROP PROCEDURE LOS_CHATADROIDES.Migrar_Clientes;
 DROP PROCEDURE LOS_CHATADROIDES.Migrar_Choferes;
-DROP PROCEDURE LOS_CHATADROIDES.Asignar_Roles_A_Usuarios; 
+DROP PROCEDURE LOS_CHATADROIDES.Cargar_Roles_X_Usuarios; 
 DROP PROCEDURE LOS_CHATADROIDES.Migrar_Factura;
 DROP PROCEDURE LOS_CHATADROIDES.Migrar_Autos;
 DROP PROCEDURE LOS_CHATADROIDES.Migrar_Auto_X_Turno; 
 DROP PROCEDURE LOS_CHATADROIDES.Migrar_Rendicion;
 DROP PROCEDURE LOS_CHATADROIDES.Cargar_viajes_con_inicio_y_fin;
 DROP PROCEDURE LOS_CHATADROIDES.Migrar_Viajes;
+DROP FUNCTION LOS_CHATADROIDES.calcular_importe_total;
+DROP PROCEDURE LOS_CHATADROIDES.Migrar_Facturas_Sin_Importe;
+DROP PROCEDURE LOS_CHATADROIDES.Cargar_Importe_A_Facturas;
+DROP TRIGGER LOS_CHATADROIDES.Encriptar_Password;
 */
 
-CREATE TABLE LOS_CHATADROIDES.Usuario--
+
+
+CREATE TABLE LOS_CHATADROIDES.Usuario
 (
 	username VARCHAR(50) PRIMARY KEY,
-	password VARCHAR(50) NOT NULL,
+	password VARCHAR(64) NOT NULL,
 	habilitado BIT NOT NULL DEFAULT 1
 );
+GO
 
-
-CREATE TABLE LOS_CHATADROIDES.Domicilio--
+CREATE TABLE LOS_CHATADROIDES.Domicilio
 (
 	localidad VARCHAR(20),
 	direccion VARCHAR(255),
@@ -67,9 +72,9 @@ CREATE TABLE LOS_CHATADROIDES.Domicilio--
 	depto VARCHAR(3),
 	PRIMARY KEY (localidad, direccion)
 );
+GO
 
-
-CREATE TABLE LOS_CHATADROIDES.Turno--
+CREATE TABLE LOS_CHATADROIDES.Turno
 (
 	hora_inicio_turno NUMERIC(18,0),
 	hora_fin_turno NUMERIC(18,0),
@@ -79,30 +84,31 @@ CREATE TABLE LOS_CHATADROIDES.Turno--
 	habilitado BIT NOT NULL DEFAULT 1,
 	PRIMARY KEY (hora_inicio_turno, hora_fin_turno)
 );
+GO
 
-CREATE TABLE LOS_CHATADROIDES.Rol--
+CREATE TABLE LOS_CHATADROIDES.Rol
 (
 	nombre_del_rol VARCHAR(25) PRIMARY KEY,
 	habilitado BIT NOT NULL DEFAULT 1
 );
+GO
 
-
-CREATE TABLE LOS_CHATADROIDES.Funcionalidad--
+CREATE TABLE LOS_CHATADROIDES.Funcionalidad
 (
 	codigo_funcionalidad TINYINT IDENTITY(1,1) PRIMARY KEY,
 	descripcion VARCHAR(50) NOT NULL
 );
+GO
 
-
-CREATE TABLE LOS_CHATADROIDES.Funcionalidad_X_Rol--
+CREATE TABLE LOS_CHATADROIDES.Funcionalidad_X_Rol
 (
 	nombre_del_rol VARCHAR(25) FOREIGN KEY REFERENCES LOS_CHATADROIDES.Rol(nombre_del_rol),
 	codigo_funcionalidad TINYINT FOREIGN KEY REFERENCES LOS_CHATADROIDES.Funcionalidad(codigo_funcionalidad), 
 	PRIMARY KEY (nombre_del_rol, codigo_funcionalidad)
 );
+GO
 
-
-CREATE TABLE LOS_CHATADROIDES.Cliente--
+CREATE TABLE LOS_CHATADROIDES.Cliente
 (
 	telefono NUMERIC(18,0) PRIMARY KEY,
 	localidad VARCHAR(20) NOT NULL DEFAULT 'Sin Especificar',
@@ -117,9 +123,9 @@ CREATE TABLE LOS_CHATADROIDES.Cliente--
 	habilitado BIT NOT NULL DEFAULT 1,
 	FOREIGN KEY (localidad, direccion) REFERENCES LOS_CHATADROIDES.Domicilio(localidad, direccion)
 );
+GO
 
-
-CREATE TABLE LOS_CHATADROIDES.Chofer--
+CREATE TABLE LOS_CHATADROIDES.Chofer
 (
 	telefono NUMERIC(18,0) PRIMARY KEY,
 	localidad VARCHAR(20) NOT NULL DEFAULT 'Sin Especificar',
@@ -133,9 +139,9 @@ CREATE TABLE LOS_CHATADROIDES.Chofer--
 	habilitado BIT NOT NULL DEFAULT 1,
 	FOREIGN KEY (localidad, direccion) REFERENCES LOS_CHATADROIDES.Domicilio(localidad, direccion)
 );
+GO
 
-
-CREATE TABLE LOS_CHATADROIDES.Administrador--
+CREATE TABLE LOS_CHATADROIDES.Administrador
 (
 	telefono NUMERIC(18,0) PRIMARY KEY,
 	localidad VARCHAR(20) NOT NULL DEFAULT 'Sin Especificar',
@@ -149,18 +155,18 @@ CREATE TABLE LOS_CHATADROIDES.Administrador--
 	habilitado BIT NOT NULL DEFAULT 1,
 	FOREIGN KEY (localidad, direccion) REFERENCES LOS_CHATADROIDES.Domicilio(localidad, direccion)
 );
+GO
 
-
-CREATE TABLE LOS_CHATADROIDES.Rol_X_Usuario--
+CREATE TABLE LOS_CHATADROIDES.Rol_X_Usuario
 (
 	username VARCHAR(50) FOREIGN KEY REFERENCES LOS_CHATADROIDES.Usuario(username),
 	nombre_del_rol VARCHAR(25) FOREIGN KEY REFERENCES LOS_CHATADROIDES.Rol(nombre_del_rol),
 	habilitado BIT NOT NULL DEFAULT 1,
 	PRIMARY KEY (username, nombre_del_rol)
 );
+GO
 
-
-CREATE TABLE LOS_CHATADROIDES.Factura--
+CREATE TABLE LOS_CHATADROIDES.Factura
 (
 	id_factura NUMERIC(18,0) PRIMARY KEY,
 	telefono_cliente NUMERIC(18,0) NOT NULL FOREIGN KEY REFERENCES LOS_CHATADROIDES.Cliente(telefono),
@@ -169,9 +175,9 @@ CREATE TABLE LOS_CHATADROIDES.Factura--
 	fecha_fin DATETIME NOT NULL,
 	importe_total FLOAT NOT NULL
 );
+GO
 
-
-CREATE TABLE LOS_CHATADROIDES.Automovil--
+CREATE TABLE LOS_CHATADROIDES.Automovil
 (
 	patente VARCHAR(10) PRIMARY KEY,
 	telefono_chofer NUMERIC(18,0) NOT NULL FOREIGN KEY REFERENCES LOS_CHATADROIDES.Chofer(telefono),
@@ -181,8 +187,9 @@ CREATE TABLE LOS_CHATADROIDES.Automovil--
 	rodado VARCHAR(10),
 	habilitado BIT NOT NULL DEFAULT 1
 );
+GO
 
-CREATE TABLE LOS_CHATADROIDES.Auto_X_Turno--
+CREATE TABLE LOS_CHATADROIDES.Auto_X_Turno
 (
 	hora_inicio_turno NUMERIC(18,0),
 	hora_fin_turno NUMERIC(18,0),
@@ -190,9 +197,9 @@ CREATE TABLE LOS_CHATADROIDES.Auto_X_Turno--
 	FOREIGN KEY (hora_inicio_turno, hora_fin_turno) REFERENCES LOS_CHATADROIDES.Turno(hora_inicio_turno, hora_fin_turno),
 	PRIMARY KEY (hora_inicio_turno, hora_fin_turno, patente)
 );
+GO
 
-
-CREATE TABLE LOS_CHATADROIDES.Rendicion--
+CREATE TABLE LOS_CHATADROIDES.Rendicion
 (
 	nro_rendicion NUMERIC(18,0) PRIMARY KEY,
 	fecha DATETIME NOT NULL,
@@ -203,10 +210,9 @@ CREATE TABLE LOS_CHATADROIDES.Rendicion--
 	porcentaje_aplicado FLOAT CHECK(porcentaje_aplicado > 0 AND porcentaje_aplicado <= 1),
 	FOREIGN KEY (hora_inicio_turno, hora_fin_turno) REFERENCES LOS_CHATADROIDES.Turno(hora_inicio_turno, hora_fin_turno)
 );  
+GO
 
-
-
-CREATE TABLE LOS_CHATADROIDES.Viaje--
+CREATE TABLE LOS_CHATADROIDES.Viaje
 (
 	numero_viaje INTEGER IDENTITY(1,1) PRIMARY KEY,
 	nro_rendicion NUMERIC(18,0) FOREIGN KEY REFERENCES LOS_CHATADROIDES.Rendicion(nro_rendicion),
@@ -221,20 +227,17 @@ CREATE TABLE LOS_CHATADROIDES.Viaje--
 	kilometros_del_viaje NUMERIC(18,0) NOT NULL,
 	FOREIGN KEY (hora_inicio_turno, hora_fin_turno) REFERENCES LOS_CHATADROIDES.Turno(hora_inicio_turno, hora_fin_turno)
 );
-
-
-/*  -------------------------------------------------------- MIGRACION --------------------------------------------------------  */
-
+GO
 
 CREATE PROCEDURE LOS_CHATADROIDES.Migrar_Domicilios
 AS
 BEGIN 
 	 DECLARE direccion CURSOR FOR 
 	 SELECT Cliente_Direccion as dir
-		FROM gd_esquema.Maestra
+	 FROM gd_esquema.Maestra
      UNION
 	 SELECT Chofer_Direccion
-		FROM gd_esquema.Maestra
+	 FROM gd_esquema.Maestra
 	 
 	 DECLARE @direccion_x_registro VARCHAR(255);
 
@@ -246,6 +249,7 @@ BEGIN
 			INSERT INTO LOS_CHATADROIDES.Domicilio (localidad, direccion) VALUES ('Sin Especificar', @direccion_x_registro);
 			FETCH direccion INTO @direccion_x_registro;
 		END 
+
 	 CLOSE direccion;
 	 DEALLOCATE direccion;
 END
@@ -269,11 +273,12 @@ BEGIN
 	FETCH turnos_cursor INTO @hora_inicio, @hora_fin, @descripcion, @valor_km, @precio_base;
 
 	WHILE (@@FETCH_STATUS = 0)
-		BEGIN	
-			INSERT INTO LOS_CHATADROIDES.Turno (hora_inicio_turno, hora_fin_turno, descripcion, valor_del_kilometro, precio_base) 
-			VALUES (@hora_inicio, @hora_fin, @descripcion, @valor_km, @precio_base);
-			FETCH turnos_cursor INTO @hora_inicio, @hora_fin, @descripcion, @valor_km, @precio_base;
-		END 
+	BEGIN	
+		INSERT INTO LOS_CHATADROIDES.Turno (hora_inicio_turno, hora_fin_turno, descripcion, valor_del_kilometro, precio_base) 
+		VALUES (@hora_inicio, @hora_fin, @descripcion, @valor_km, @precio_base);
+		FETCH turnos_cursor INTO @hora_inicio, @hora_fin, @descripcion, @valor_km, @precio_base;
+	 END 
+
 	 CLOSE turnos_cursor;
 	 DEALLOCATE turnos_cursor;
 END
@@ -291,12 +296,12 @@ BEGIN
 	FETCH funcs_cursor INTO @cod_func
 
 	WHILE(@@FETCH_STATUS = 0)
-		BEGIN
-			INSERT INTO LOS_CHATADROIDES.Funcionalidad_X_Rol 
-				(nombre_del_rol, codigo_funcionalidad) VALUES ('Administrador', @cod_func);
+	BEGIN
+		INSERT INTO LOS_CHATADROIDES.Funcionalidad_X_Rol 
+			(nombre_del_rol, codigo_funcionalidad) VALUES ('Administrador', @cod_func);
 
-			FETCH funcs_cursor INTO @cod_func
-		END
+		FETCH funcs_cursor INTO @cod_func
+	END
 
 	CLOSE funcs_cursor;
 	DEALLOCATE funcs_cursor;
@@ -324,33 +329,25 @@ BEGIN
 	FETCH clientes_cursor INTO @apellido, @nombre, @direccion, @dni, @mail, @fecha_de_nac, @telefono
 	
 	WHILE (@@FETCH_STATUS = 0)
-		BEGIN
-			IF( NOT EXISTS (SELECT username FROM LOS_CHATADROIDES.Usuario WHERE username = @nombre + '_' + @apellido) )
-				BEGIN
-					INSERT INTO LOS_CHATADROIDES.Usuario (username, password)
-						VALUES (@nombre + '_' + @apellido, @nombre + '_' + @apellido);
-				END;
-
-			INSERT INTO LOS_CHATADROIDES.Cliente (telefono, direccion, nombre, apellido, dni, fecha_de_nacimiento, mail, username)
-				   VALUES (@telefono, @direccion, @nombre, @apellido, @dni, @fecha_de_nac, @mail, @nombre + '_' + @apellido);
-			/*
-
-			FIXME Hay que hacer la funcion que encripte para tardar menos
-
-			IF( NOT EXISTS (SELECT username 
-								FROM LOS_CHATADROIDES.Usuario 
-								WHERE username = @nombre + '_' + @apellido) )
-
+	BEGIN
+		IF( NOT EXISTS (SELECT username FROM LOS_CHATADROIDES.Usuario WHERE username = @nombre + '_' + @apellido) )
+			BEGIN
 				INSERT INTO LOS_CHATADROIDES.Usuario (username, password)
-					VALUES (@nombre + '_' + @apellido, generar_contraseña(@nombre + '_' + @apellido));
+					VALUES (@nombre + '_' + @apellido, @nombre + '_' + @apellido);
+			END;
 
-			*/
-			FETCH clientes_cursor INTO @apellido, @nombre, @direccion, @dni, @mail, @fecha_de_nac, @telefono;
-		END
-		CLOSE clientes_cursor;
-		DEALLOCATE clientes_cursor;
+		INSERT INTO LOS_CHATADROIDES.Cliente (telefono, direccion, nombre, apellido, dni, fecha_de_nacimiento, mail, username)
+			   VALUES (@telefono, @direccion, @nombre, @apellido, @dni, @fecha_de_nac, @mail, @nombre + '_' + @apellido);
+		
+		FETCH clientes_cursor INTO @apellido, @nombre, @direccion, @dni, @mail, @fecha_de_nac, @telefono;
+		
+	END
+	
+	CLOSE clientes_cursor;
+	DEALLOCATE clientes_cursor;
 END
 GO
+
 
 CREATE PROCEDURE LOS_CHATADROIDES.Migrar_Choferes
 AS
@@ -372,24 +369,26 @@ BEGIN
 	FETCH choferes_cursor INTO @apellido, @nombre, @direccion, @dni, @fecha_de_nac, @telefono, @mail
 	
 	WHILE (@@FETCH_STATUS = 0)
-		BEGIN
-			IF( NOT EXISTS (SELECT username FROM LOS_CHATADROIDES.Usuario WHERE username = @nombre + '_' + @apellido) )
-				BEGIN
-					INSERT INTO LOS_CHATADROIDES.Usuario (username, password)
-						VALUES (@nombre + '_' + @apellido, @nombre + '_' + @apellido);
-				END;
+	BEGIN
+		IF( NOT EXISTS (SELECT username FROM LOS_CHATADROIDES.Usuario WHERE username = @nombre + '_' + @apellido) )
+			BEGIN
+				INSERT INTO LOS_CHATADROIDES.Usuario (username, password)
+					VALUES (@nombre + '_' + @apellido, @nombre + '_' + @apellido);
+			END;
 
-			INSERT INTO LOS_CHATADROIDES.Chofer (telefono, direccion, nombre, apellido, dni, fecha_de_nacimiento, mail, username)
-				   VALUES (@telefono, @direccion, @nombre, @apellido, @dni, @fecha_de_nac, @mail, @nombre + '_' + @apellido);
+		INSERT INTO LOS_CHATADROIDES.Chofer (telefono, direccion, nombre, apellido, dni, fecha_de_nacimiento, mail, username)
+				VALUES (@telefono, @direccion, @nombre, @apellido, @dni, @fecha_de_nac, @mail, @nombre + '_' + @apellido);
 
-			FETCH choferes_cursor INTO @apellido, @nombre, @direccion, @dni, @fecha_de_nac, @telefono, @mail;
-		END
-		CLOSE choferes_cursor;
-		DEALLOCATE choferes_cursor;
+		FETCH choferes_cursor INTO @apellido, @nombre, @direccion, @dni, @fecha_de_nac, @telefono, @mail;
+	END
+
+	CLOSE choferes_cursor;
+	DEALLOCATE choferes_cursor;
 END
 GO
+	
 		
-CREATE PROCEDURE LOS_CHATADROIDES.Asignar_Roles_A_Usuarios
+CREATE PROCEDURE LOS_CHATADROIDES.Cargar_Roles_X_Usuarios
 AS
 BEGIN
 	INSERT INTO LOS_CHATADROIDES.Rol_X_Usuario (username, nombre_del_rol) VALUES ('admin', 'Administrador')
@@ -403,10 +402,11 @@ BEGIN
 	FETCH cliente_cursor INTO @username
 	
 	WHILE(@@FETCH_STATUS = 0)
-		BEGIN
-			INSERT INTO LOS_CHATADROIDES.Rol_X_Usuario (username, nombre_del_rol) VALUES (@username, 'Cliente')
-			FETCH cliente_cursor INTO @username
-		END;
+	BEGIN
+		INSERT INTO LOS_CHATADROIDES.Rol_X_Usuario (username, nombre_del_rol) VALUES (@username, 'Cliente')
+		FETCH cliente_cursor INTO @username
+	END;
+
 	CLOSE cliente_cursor
 	DEALLOCATE cliente_cursor
 
@@ -419,10 +419,10 @@ BEGIN
 	FETCH chofer_cursor INTO @username2
 
 	WHILE(@@FETCH_STATUS = 0) 
-		BEGIN
-			INSERT INTO LOS_CHATADROIDES.Rol_X_Usuario (username, nombre_del_rol) VALUES (@username2, 'Chofer')
-			FETCH chofer_cursor INTO @username2
-		END;
+	BEGIN
+		INSERT INTO LOS_CHATADROIDES.Rol_X_Usuario (username, nombre_del_rol) VALUES (@username2, 'Chofer')
+		FETCH chofer_cursor INTO @username2
+	END;
 
 	CLOSE chofer_cursor
 	DEALLOCATE chofer_cursor
@@ -477,11 +477,12 @@ BEGIN
 	FETCH auto_x_turno_cursor INTO @turno_hora_inicio, @turno_hora_fin, @auto_patente
 
 	WHILE(@@FETCH_STATUS = 0)
-		BEGIN
-			INSERT INTO LOS_CHATADROIDES.Auto_X_Turno (hora_inicio_turno, hora_fin_turno, patente)
-				VALUES (@turno_hora_inicio, @turno_hora_fin, @auto_patente)
-			FETCH auto_x_turno_cursor INTO @turno_hora_inicio, @turno_hora_fin, @auto_patente
-		END;
+	BEGIN
+		INSERT INTO LOS_CHATADROIDES.Auto_X_Turno (hora_inicio_turno, hora_fin_turno, patente)
+			VALUES (@turno_hora_inicio, @turno_hora_fin, @auto_patente)
+		FETCH auto_x_turno_cursor INTO @turno_hora_inicio, @turno_hora_fin, @auto_patente
+	END;
+
 	CLOSE auto_x_turno_cursor
 	DEALLOCATE auto_x_turno_cursor
 END;
@@ -523,7 +524,6 @@ GO
 CREATE PROCEDURE LOS_CHATADROIDES.Migrar_Viajes
 AS
 BEGIN 
-
   SELECT M1.Chofer_Telefono AS chofer, M2.Cliente_Telefono AS cliente, M1.Viaje_Fecha AS fecha_y_hora_inicio, M2.Viaje_Fecha AS fecha_y_hora_fin 
   INTO LOS_CHATADROIDES.#Viajes_con_inicio_y_fin
   FROM gd_esquema.Maestra M1 LEFT JOIN gd_esquema.Maestra M2
@@ -532,73 +532,81 @@ BEGIN
 	      AND M1.Cliente_Telefono = M2.Cliente_Telefono
         AND M1.Turno_Hora_Inicio = M2.Turno_Hora_Inicio
   	    AND M1.Auto_Patente = M2.Auto_Patente)
-  WHERE CONVERT(time, M1.Viaje_Fecha) < CONVERT(time, M2.Viaje_Fecha)
+  WHERE CONVERT(time, M1.Viaje_Fecha) < CONVERT(time, M2.Viaje_Fecha) 
   GROUP BY M1.Chofer_Telefono, M2.Cliente_Telefono, M1.Viaje_Fecha, M2.Viaje_Fecha
   
   DECLARE cursor_viajes CURSOR FOR 
-  SELECT chofer, N.Auto_Patente, cliente, N.Turno_Hora_Inicio, N.Turno_Hora_Fin, fecha_y_hora_inicio, fecha_y_hora_fin, SUM(N.Viaje_Cant_Kilometros) AS cantidad_km_viaje,N.Rendicion_Nro, M.Factura_Nro
+  SELECT chofer, N.Auto_Patente, cliente, N.Turno_Hora_Inicio, N.Turno_Hora_Fin, fecha_y_hora_inicio, fecha_y_hora_fin, 
+	SUM(N.Viaje_Cant_Kilometros) AS cantidad_km_viaje,N.Rendicion_Nro, M.Factura_Nro
     FROM (SELECT chofer, cliente, fecha_y_hora_inicio, MIN(fecha_y_hora_fin) AS fecha_y_hora_fin 
-      		FROM LOS_CHATADROIDES.#Viajes_con_inicio_y_fin
-		      GROUP BY chofer, cliente, fecha_y_hora_inicio) AS T 
+      	  FROM LOS_CHATADROIDES.#Viajes_con_inicio_y_fin
+		  GROUP BY chofer, cliente, fecha_y_hora_inicio) AS T 
+
     	LEFT JOIN 
-      (SELECT Chofer_Telefono, Auto_Patente, Cliente_Telefono, Turno_Hora_Inicio, 
-        Turno_Hora_Fin, Viaje_Fecha, Viaje_Cant_Kilometros, Rendicion_Nro, Factura_Nro
-	     FROM gd_esquema.Maestra
-  	   GROUP BY Chofer_Telefono, Auto_Patente, Cliente_Telefono, Turno_Hora_Inicio, 
+
+		 (SELECT Chofer_Telefono, Auto_Patente, Cliente_Telefono, Turno_Hora_Inicio, 
+			Turno_Hora_Fin, Viaje_Fecha, Viaje_Cant_Kilometros, Rendicion_Nro, Factura_Nro
+	      FROM gd_esquema.Maestra
+  	      GROUP BY Chofer_Telefono, Auto_Patente, Cliente_Telefono, Turno_Hora_Inicio, 
     	 	Turno_Hora_Fin, Viaje_Fecha, Viaje_Cant_Kilometros, Rendicion_Nro, Factura_Nro
-       HAVING Rendicion_Nro IS NOT NULL) AS N
-      	ON(N.Chofer_Telefono = T.chofer 
-						AND N.Cliente_Telefono = T.cliente 
-						AND T.fecha_y_hora_inicio = N.Viaje_Fecha)  
-					LEFT JOIN
-				(SELECT Chofer_Telefono, Auto_Patente, Cliente_Telefono, Turno_Hora_Inicio, 
-					Turno_Hora_Fin, Viaje_Fecha, Rendicion_Nro, Factura_Nro
-         FROM gd_esquema.Maestra
-				 GROUP BY Chofer_Telefono, Auto_Patente, Cliente_Telefono, Turno_Hora_Inicio, 
-					Turno_Hora_Fin, Viaje_Fecha, Rendicion_Nro, Factura_Nro
-         HAVING Factura_Nro IS NOT NULL) AS M
-					ON(M.Chofer_Telefono = N.Chofer_Telefono 
-							AND M.Cliente_Telefono = N.Cliente_Telefono
-							AND M.Viaje_Fecha = N.Viaje_Fecha
-							AND M.Auto_Patente = N.Auto_Patente)
-  GROUP BY chofer, N.Auto_Patente, cliente, N.Turno_Hora_Inicio, N.Turno_Hora_Fin, fecha_y_hora_inicio, fecha_y_hora_fin, N.Rendicion_Nro, M.Factura_Nro
+          HAVING Rendicion_Nro IS NOT NULL) AS N
+
+	      	ON(N.Chofer_Telefono = T.chofer 
+				AND N.Cliente_Telefono = T.cliente 
+				AND T.fecha_y_hora_inicio = N.Viaje_Fecha) 
+						 
+		LEFT JOIN
+
+		  (SELECT Chofer_Telefono, Auto_Patente, Cliente_Telefono, Turno_Hora_Inicio, 
+			Turno_Hora_Fin, Viaje_Fecha, Rendicion_Nro, Factura_Nro
+           FROM gd_esquema.Maestra
+		   GROUP BY Chofer_Telefono, Auto_Patente, Cliente_Telefono, Turno_Hora_Inicio, 
+			Turno_Hora_Fin, Viaje_Fecha, Rendicion_Nro, Factura_Nro
+		   HAVING Factura_Nro IS NOT NULL) AS M
+			
+			ON(M.Chofer_Telefono = N.Chofer_Telefono 
+					AND M.Cliente_Telefono = N.Cliente_Telefono
+					AND M.Viaje_Fecha = N.Viaje_Fecha
+					AND M.Auto_Patente = N.Auto_Patente)
+												
+			 GROUP BY chofer, N.Auto_Patente, cliente, N.Turno_Hora_Inicio, N.Turno_Hora_Fin, fecha_y_hora_inicio, fecha_y_hora_fin, N.Rendicion_Nro, M.Factura_Nro
 	
 	DECLARE @nro_rendicion NUMERIC(18,0);
-  DECLARE @telefono_chofer NUMERIC(18,0);
-  DECLARE @patente VARCHAR(10);
-  DECLARE @id_factura NUMERIC(18,0);
-  DECLARE @telefono_cliente NUMERIC(18,0);
-  DECLARE @hora_inicio_turno NUMERIC(18,0)
+	DECLARE @telefono_chofer NUMERIC(18,0);
+	DECLARE @patente VARCHAR(10);
+	DECLARE @id_factura NUMERIC(18,0);
+	DECLARE @telefono_cliente NUMERIC(18,0);
+	DECLARE @hora_inicio_turno NUMERIC(18,0)
 	DECLARE @hora_fin_turno NUMERIC(18,0);
 	DECLARE @fecha_y_hora_inicio_viaje DATETIME;
 	DECLARE @fecha_y_hora_fin_viaje DATETIME;
-  DECLARE @kilometros_del_viaje NUMERIC(18,0);
+	DECLARE @kilometros_del_viaje NUMERIC(18,0);
   
-  OPEN cursor_viajes;
+	OPEN cursor_viajes;
 	FETCH cursor_viajes INTO 
-              @telefono_chofer, 
-              @patente, 
-              @telefono_cliente, 
-              @hora_inicio_turno, 
-              @hora_fin_turno, 
-              @fecha_y_hora_inicio_viaje, 
-              @fecha_y_hora_fin_viaje, 
-              @kilometros_del_viaje, 
-              @nro_rendicion, 
-              @id_factura 
+				@telefono_chofer, 
+				@patente, 
+				@telefono_cliente, 
+				@hora_inicio_turno, 
+				@hora_fin_turno, 
+				@fecha_y_hora_inicio_viaje, 
+				@fecha_y_hora_fin_viaje, 
+				@kilometros_del_viaje, 
+				@nro_rendicion, 
+				@id_factura 
 
 	WHILE (@@FETCH_STATUS = 0)
   	BEGIN
       INSERT INTO LOS_CHATADROIDES.Viaje (nro_rendicion, 
-											telefono_chofer, 
-											patente, 
-											id_factura, 
-											telefono_cliente, 
-											hora_inicio_turno, 
-											hora_fin_turno, 
-											fecha_y_hora_inicio_viaje, 
-											fecha_y_hora_fin_viaje, 
-											kilometros_del_viaje)
+										  telefono_chofer, 
+									      patente, 
+									      id_factura, 
+										  telefono_cliente, 
+										  hora_inicio_turno, 
+										  hora_fin_turno, 
+										  fecha_y_hora_inicio_viaje, 
+										  fecha_y_hora_fin_viaje, 
+										  kilometros_del_viaje)
 
       								VALUES (@nro_rendicion,
 											@telefono_chofer,
@@ -612,16 +620,16 @@ BEGIN
 											@kilometros_del_viaje)
       
       FETCH cursor_viajes INTO 
-              @telefono_chofer, 
-              @patente, 
-              @telefono_cliente, 
-              @hora_inicio_turno, 
-              @hora_fin_turno, 
-              @fecha_y_hora_inicio_viaje, 
-              @fecha_y_hora_fin_viaje, 
-              @kilometros_del_viaje, 
-              @nro_rendicion, 
-              @id_factura 
+					  @telefono_chofer, 
+					  @patente, 
+					  @telefono_cliente, 
+					  @hora_inicio_turno, 
+					  @hora_fin_turno, 
+					  @fecha_y_hora_inicio_viaje, 
+					  @fecha_y_hora_fin_viaje, 
+					  @kilometros_del_viaje, 
+					  @nro_rendicion, 
+					  @id_factura 
     END 
     
   CLOSE cursor_viajes;
@@ -631,43 +639,59 @@ BEGIN
 
 END
 GO
- 
-CREATE FUNCTION LOS_CHATADROIDES.calcularImporteTotal 
+
+
+CREATE TRIGGER LOS_CHATADROIDES.Encriptar_Password
+ON LOS_CHATADROIDES.Usuario
+INSTEAD OF INSERT
+AS 
+BEGIN    
+	DECLARE @password VARCHAR(64)
+	DECLARE @username VARCHAR(50)
+
+	SELECT @username = username, @password = password FROM inserted
+
+	INSERT INTO LOS_CHATADROIDES.Usuario (username, password) VALUES ( @username,  CONVERT(VARCHAR(64), HASHBYTES('SHA2_256', @password), 2) ) 
+END 
+GO
+
+CREATE FUNCTION LOS_CHATADROIDES.calcular_importe_total 
 (@mes_factura INTEGER,
-	@telefono_cliente NUMERIC(18,0))
+@telefono_cliente NUMERIC(18,0))
 RETURNS FLOAT
 BEGIN 
 	DECLARE viajes_para_facturar CURSOR FOR
 	SELECT kilometros_del_viaje, T.valor_del_kilometro, T.precio_base
-  FROM LOS_CHATADROIDES.Viaje V JOIN LOS_CHATADROIDES.Turno T
-  ON(T.hora_inicio_turno = V.hora_inicio_turno AND T.hora_fin_turno = V.hora_fin_turno)
-  WHERE MONTH(V.fecha_y_hora_inicio_viaje) = @mes_factura AND V.telefono_cliente = @telefono_cliente
+	FROM LOS_CHATADROIDES.Viaje V JOIN LOS_CHATADROIDES.Turno T
+		ON(T.hora_inicio_turno = V.hora_inicio_turno AND T.hora_fin_turno = V.hora_fin_turno)
+	WHERE MONTH(V.fecha_y_hora_inicio_viaje) = @mes_factura AND V.telefono_cliente = @telefono_cliente
   
-  DECLARE @importe_total FLOAT;
-  SET @importe_total = 0.0 ;
-  DECLARE @kilometros_del_viaje NUMERIC(18,0);
-  DECLARE @valor_del_kilometro NUMERIC(18,2);
-  DECLARE @precio_base NUMERIC(18,2);
+	DECLARE @importe_total FLOAT;
+	SET @importe_total = 0.0 ;
+	DECLARE @kilometros_del_viaje NUMERIC(18,0);
+	DECLARE @valor_del_kilometro NUMERIC(18,2);
+	DECLARE @precio_base NUMERIC(18,2);
   
   OPEN viajes_para_facturar;
   
   FETCH viajes_para_facturar INTO @kilometros_del_viaje, @valor_del_kilometro, @precio_base;
   
   WHILE (@@FETCH_STATUS = 0)
-  	BEGIN 
-    	SET @importe_total = @importe_total + @precio_base + @kilometros_del_viaje * @valor_del_kilometro; 
+  BEGIN 
+   	SET @importe_total = @importe_total + @precio_base + @kilometros_del_viaje * @valor_del_kilometro; 
     
-    	FETCH viajes_para_facturar INTO @kilometros_del_viaje, @valor_del_kilometro, @precio_base;
-    END
+   	FETCH viajes_para_facturar INTO @kilometros_del_viaje, @valor_del_kilometro, @precio_base;
+  END
 	
   CLOSE viajes_para_facturar;
   DEALLOCATE viajes_para_facturar;
   
-	RETURN @importe_total;
+  RETURN @importe_total;
 END
 GO
 
-CREATE PROCEDURE LOS_CHATADROIDES.Migrar_Factura
+
+CREATE PROCEDURE LOS_CHATADROIDES.Migrar_Facturas_Sin_Importe
 AS
 BEGIN
 	
@@ -685,11 +709,11 @@ BEGIN
 
 	OPEN factura_cursor
 	FETCH factura_cursor INTO @factura_fecha, @factura_fecha_fin, @factura_fecha_inicio, @factura_nro, @cliente_telefono 
-	SELECT * FROM LOS_CHATADROIDES.Viaje
+	
 	WHILE (@@FETCH_STATUS = 0)
 	BEGIN
 		INSERT INTO LOS_CHATADROIDES.Factura (fecha_facturacion, fecha_fin, fecha_inicio, id_factura, telefono_cliente, importe_total) 
-			VALUES (@factura_fecha, @factura_fecha_fin, @factura_fecha_inicio, @factura_nro, @cliente_telefono, LOS_CHATADROIDES.calcularImporteTotal(MONTH(@factura_fecha_inicio), @cliente_telefono) )
+			VALUES (@factura_fecha, @factura_fecha_fin, @factura_fecha_inicio, @factura_nro, @cliente_telefono, 0 )
 
 		FETCH factura_cursor INTO @factura_fecha, @factura_fecha_fin, @factura_fecha_inicio, @factura_nro, @cliente_telefono 
 	END;
@@ -699,8 +723,35 @@ BEGIN
 
 END;
 GO	
-/*  -------------------------------------------------------- SCRIPT DE MIGRACION --------------------------------------------------------  */
-BEGIN TRANSACTION
+
+
+CREATE PROCEDURE LOS_CHATADROIDES.Cargar_Importe_A_Facturas
+AS
+BEGIN 
+	DECLARE factura_cursor CURSOR FOR
+	SELECT telefono_cliente, fecha_inicio FROM LOS_CHATADROIDES.Factura
+
+	DECLARE @telefono_cliente NUMERIC(18,0)
+	DECLARE @fecha_inicio DATETIME
+
+	OPEN factura_cursor
+	FETCH factura_cursor INTO @telefono_cliente, @fecha_inicio
+
+	WHILE(@@FETCH_STATUS = 0)
+	BEGIN
+		UPDATE LOS_CHATADROIDES.Factura
+		SET importe_total = LOS_CHATADROIDES.calcular_importe_total(MONTH(@fecha_inicio), @telefono_cliente)
+		WHERE telefono_cliente = @telefono_cliente AND fecha_inicio = @fecha_inicio 
+
+		FETCH factura_cursor INTO @telefono_cliente, @fecha_inicio
+	END
+
+	CLOSE factura_cursor
+	DEALLOCATE factura_cursor
+END
+GO
+
+
 EXEC LOS_CHATADROIDES.Migrar_Domicilios;
 EXEC LOS_CHATADROIDES.Migrar_Turnos;
 
@@ -708,7 +759,6 @@ INSERT INTO LOS_CHATADROIDES.Rol (nombre_del_rol) VALUES ('Chofer');
 INSERT INTO LOS_CHATADROIDES.Rol (nombre_del_rol) VALUES ('Cliente');
 INSERT INTO LOS_CHATADROIDES.Rol (nombre_del_rol) VALUES ('Administrador');
 
--- Cargar tabla Funcionalidades
 INSERT INTO LOS_CHATADROIDES.Funcionalidad (descripcion) VALUES ('ABM de Rol');
 INSERT INTO LOS_CHATADROIDES.Funcionalidad (descripcion) VALUES ('Registro de Usuario');
 INSERT INTO LOS_CHATADROIDES.Funcionalidad (descripcion) VALUES ('ABM de Cliente');
@@ -730,20 +780,20 @@ INSERT INTO LOS_CHATADROIDES.Administrador
 	(telefono, direccion, nombre, apellido, dni, fecha_de_nacimiento, mail, username) VALUES
 		(1, '25 de Mayo 5619', 'Quique', 'Reinosa', 1, '1966-01-01', 'chakl@hotmail.com', 'admin')
 	
-EXEC LOS_CHATADROIDES.Asignar_Roles_A_Usuarios;--cambiar nombre a cargar roles x usuario
+EXEC LOS_CHATADROIDES.Cargar_Roles_X_Usuarios;
 
 EXEC LOS_CHATADROIDES.Migrar_Autos;
 EXEC LOS_CHATADROIDES.Migrar_Auto_X_Turno;
 EXEC LOS_CHATADROIDES.Migrar_Rendicion;
-EXEC LOS_CHATADROIDES.Migrar_Factura;
+
+EXEC LOS_CHATADROIDES.Migrar_Facturas_Sin_Importe; 
 EXEC LOS_CHATADROIDES.Migrar_Viajes;
 
+EXEC LOS_CHATADROIDES.Cargar_Importe_A_Facturas;
 
 
 
-ROLLBACK
 
 
 
 
-select Factura_Fecha_Inicio, Factura_Fecha_Fin, MONTH(Factura_Fecha_Inicio), MONTH(Factura_Fecha_Fin) from gd_esquema.Maestra group by Factura_Fecha_Inicio, Factura_Fecha_Fin ORDER BY 1,2
