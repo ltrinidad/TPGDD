@@ -1,6 +1,5 @@
 USE [GD1C2017]
 GO
-/****** Object:  Schema [gd_esquema]    Script Date: 04/15/2012 01:58:54 ******/
 CREATE SCHEMA [LOS_CHATADROIDES] AUTHORIZATION [gd]
 GO
 
