@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace UberFrba.Login_Usuario
 {
@@ -15,6 +16,7 @@ namespace UberFrba.Login_Usuario
         public Login()
         {
             InitializeComponent();
+     
         }
 
         private void Login_Load(object sender, EventArgs e)
