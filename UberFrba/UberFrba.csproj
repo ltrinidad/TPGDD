@@ -135,6 +135,7 @@
     <Compile Include="Alta de Usuario\Alta de Usuario.Designer.cs">
       <DependentUpon>Alta de Usuario.cs</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\DBConexion.cs" />
     <Compile Include="Facturacion\Facturar a un Cliente.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -153,12 +154,14 @@
     <Compile Include="Login Usuario\Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
+    <Compile Include="Login Usuario\PasswordInvalidaException.cs" />
     <Compile Include="Login Usuario\Seleccionar Rol.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Login Usuario\Seleccionar Rol.Designer.cs">
       <DependentUpon>Seleccionar Rol.cs</DependentUpon>
     </Compile>
+    <Compile Include="Login Usuario\UsuarioDeshabilitadoException.cs" />
     <Compile Include="Menu\Menu ABM.cs">
       <SubType>Form</SubType>
     </Compile>

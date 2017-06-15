@@ -1,7 +1,4 @@
-USE [GD1C2017]
-GO
-CREATE SCHEMA [LOS_CHATADROIDES] AUTHORIZATION [gd]
-GO
+
 
 CREATE TABLE LOS_CHATADROIDES.Usuario
 (
@@ -9,7 +6,6 @@ CREATE TABLE LOS_CHATADROIDES.Usuario
 	password VARCHAR(64) NOT NULL,
 	habilitado BIT NOT NULL DEFAULT 1
 );
-
 
 CREATE TABLE LOS_CHATADROIDES.Domicilio
 (
@@ -595,8 +591,16 @@ BEGIN
 
 	SELECT @username = username, @password = password FROM inserted
 
-	INSERT INTO LOS_CHATADROIDES.Usuario (username, password) VALUES ( @username,  CONVERT(VARCHAR(64), HASHBYTES('SHA2_256', @password), 2) ) 
+	INSERT INTO LOS_CHATADROIDES.Usuario (username, password) VALUES ( @username,  LOS_CHATADROIDES.Hashear_Password(@password)) 
 END 
+GO
+
+CREATE FUNCTION LOS_CHATADROIDES.Hashear_Password
+(@password VARCHAR(64))
+RETURNS VARCHAR(64)
+BEGIN
+  RETURN CONVERT(VARCHAR(64), HASHBYTES('SHA2_256', @password), 2)  
+END
 GO
 
 CREATE FUNCTION LOS_CHATADROIDES.calcular_importe_total 
@@ -694,7 +698,7 @@ BEGIN
 	DEALLOCATE factura_cursor
 END
 GO
-
+SELECT * FROM LOS_CHATADROIDES.Usuario
 
 EXEC LOS_CHATADROIDES.Migrar_Domicilios;
 EXEC LOS_CHATADROIDES.Migrar_Turnos;
@@ -731,3 +735,7 @@ EXEC LOS_CHATADROIDES.Migrar_Rendicion;
 EXEC LOS_CHATADROIDES.Migrar_Facturas_Sin_Importe; 
 EXEC LOS_CHATADROIDES.Migrar_Viajes;
 EXEC LOS_CHATADROIDES.Cargar_Importe_A_Facturas;
+
+
+SELECT * FROM LOS_CHATADROIDES.Usuario WHERE username LIKE '%CHEVY%'
+UPDATE LOS_CHATADROIDES.Usuario SET habilitado = 1 WHERE username = 'admin'

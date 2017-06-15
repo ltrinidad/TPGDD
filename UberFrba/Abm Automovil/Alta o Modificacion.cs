@@ -34,14 +34,12 @@ namespace UberFrba.Abm_Automovil
             
         }
 
-        private void turno_TextChanged(object sender, EventArgs e)
-        {
-
+        private void turno_TextChanged(object sender, EventArgs e){
+        
         }
 
         private void marca_TextChanged(object sender, EventArgs e)
         {
-
         }
 
      
