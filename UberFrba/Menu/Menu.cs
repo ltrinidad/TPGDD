@@ -7,20 +7,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UberFrba.Conexion;
+using System.Data.SqlClient;
+using UberFrba.Login_Usuario;
 
 namespace UberFrba.Menu
 {
     public partial class Menu : Form
-    {
-        public Menu()
+    {   
+        private String rol;
+        private String username;
+        public Menu(String rol, String username)
         {
             InitializeComponent();
-           
+            this.rol = rol;
+            this.username = username;
+            this.cargarFuncionalidades();
         }
 
         private void Menu_Load(object sender, EventArgs e)
         {
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -30,9 +36,31 @@ namespace UberFrba.Menu
 
         private void button2_Click(object sender, EventArgs e)
         {
-            this.Close();
-            Form seleccionarRol = new Login_Usuario.Seleccionar_Rol();
+            Form seleccionarRol = new Seleccionar_Rol(username);
             seleccionarRol.Show();
+            this.Close();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void cargarFuncionalidades()
+        {
+            SqlDataReader funcionalidades = this.leerFuncionalidades();
+
+            while (funcionalidades.Read())
+                this.comboBox1.Items.Add(funcionalidades.GetString(0));
+
+            funcionalidades.Close();
+        }
+
+        private SqlDataReader leerFuncionalidades()
+        {
+            return DBConexion.ResolverConsulta("SELECT descripcion" 
+                                             + " FROM LOS_CHATADROIDES.Funcionalidad_X_Rol FXR JOIN LOS_CHATADROIDES.Funcionalidad F" 
+                                             + " ON(FXR.codigo_funcionalidad = F.codigo_funcionalidad)"
+                                             + " WHERE FXR.nombre_del_rol = '" + rol + "'");
         }
     }
 }

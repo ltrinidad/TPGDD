@@ -58,13 +58,11 @@ namespace UberFrba.Login_Usuario
 
                 }
                 else {
-                    Form seleccionDeRol = new Seleccionar_Rol();
+                    Form seleccionDeRol = new Seleccionar_Rol(this.username.Text);
                     seleccionDeRol.Show();
                     this.Close();
                 }
-
                 
-
             }
             catch (PasswordInvalidaException t)
             {              

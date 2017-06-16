@@ -28,19 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.selectorRol = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // comboBox1
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(54, 78);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(176, 21);
-            this.comboBox1.TabIndex = 0;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.selectorRol.FormattingEnabled = true;
+            this.selectorRol.Location = new System.Drawing.Point(54, 78);
+            this.selectorRol.Name = "comboBox1";
+            this.selectorRol.Size = new System.Drawing.Size(176, 21);
+            this.selectorRol.TabIndex = 0;
+            this.selectorRol.SelectedIndexChanged += new System.EventHandler(this.selectorRol_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -68,7 +68,7 @@
             this.ClientSize = new System.Drawing.Size(284, 201);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.selectorRol);
             this.Name = "Seleccionar_Rol";
             this.Text = "Seleccionar_Rol";
             this.Load += new System.EventHandler(this.Seleccionar_Rol_Load);
@@ -79,7 +79,7 @@
 
         #endregion
 
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox selectorRol;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button1;
     }
