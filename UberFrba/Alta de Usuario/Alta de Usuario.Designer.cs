@@ -62,6 +62,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(221, 20);
             this.textBox1.TabIndex = 3;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // textBox2
             // 
@@ -125,6 +126,7 @@
             this.Controls.Add(this.label1);
             this.Name = "Alta_de_Usuario";
             this.Text = "Alta de Usuario";
+            this.Load += new System.EventHandler(this.Alta_de_Usuario_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

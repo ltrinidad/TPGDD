@@ -1,6 +1,6 @@
-﻿namespace UberFrba.Listado_Estadistico
+﻿namespace UberFrba.Facturacion_Cliente
 {
-    partial class Form1
+    partial class Facturacion_Cliente
     {
         /// <summary>
         /// Required designer variable.
@@ -213,6 +213,7 @@
             this.Controls.Add(this.label2);
             this.Name = "Form1";
             this.Text = "Facturar a un Cliente";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

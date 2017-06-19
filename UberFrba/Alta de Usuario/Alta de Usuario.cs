@@ -21,5 +21,15 @@ namespace UberFrba.Alta_de_Usuario
         {
 
         }
+
+        private void Alta_de_Usuario_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

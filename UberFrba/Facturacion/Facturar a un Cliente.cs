@@ -8,16 +8,21 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace UberFrba.Listado_Estadistico
+namespace UberFrba.Facturacion_Cliente
 {
-    public partial class Form1 : Form
+    public partial class Facturacion_Cliente : Form
     {
-        public Form1()
+        public Facturacion_Cliente()
         {
             InitializeComponent();
         }
 
         private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
         {
 
         }

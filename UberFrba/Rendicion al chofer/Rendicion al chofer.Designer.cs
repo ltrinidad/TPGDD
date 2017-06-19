@@ -1,6 +1,6 @@
-﻿namespace UberFrba.Rendicion_Viajes
+﻿namespace UberFrba.Rendicion_Al_Chofer
 {
-    partial class Form1
+    partial class Rendicion_Al_Chofer
     {
         /// <summary>
         /// Required designer variable.
@@ -150,6 +150,7 @@
             this.Controls.Add(this.dateTimePicker1);
             this.Name = "Form1";
             this.Text = "Rendicion de viaje";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

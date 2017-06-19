@@ -162,6 +162,8 @@
       <DependentUpon>Seleccionar Rol.cs</DependentUpon>
     </Compile>
     <Compile Include="Login Usuario\UsuarioDeshabilitadoException.cs" />
+    <Compile Include="Menu\Funcionalidad.cs" />
+    <Compile Include="Menu\Funcionalidades.cs" />
     <Compile Include="Menu\Menu ABM.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -194,11 +196,11 @@
     <Compile Include="Registro Viajes\Seleccionar Cliente.Designer.cs">
       <DependentUpon>Seleccionar Cliente.cs</DependentUpon>
     </Compile>
-    <Compile Include="Rendicion Viajes\Rendicion de viaje.cs">
+    <Compile Include="Rendicion al chofer\Rendicion al chofer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Rendicion Viajes\Rendicion de viaje.Designer.cs">
-      <DependentUpon>Rendicion de viaje.cs</DependentUpon>
+    <Compile Include="Rendicion al chofer\Rendicion al chofer.Designer.cs">
+      <DependentUpon>Rendicion al chofer.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Abm Automovil\Alta o Modificacion.resx">
       <DependentUpon>Alta o Modificacion.cs</DependentUpon>
@@ -281,8 +283,8 @@
     <EmbeddedResource Include="Registro Viajes\Seleccionar Cliente.resx">
       <DependentUpon>Seleccionar Cliente.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Rendicion Viajes\Rendicion de viaje.resx">
-      <DependentUpon>Rendicion de viaje.cs</DependentUpon>
+    <EmbeddedResource Include="Rendicion al chofer\Rendicion al chofer.resx">
+      <DependentUpon>Rendicion al chofer.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

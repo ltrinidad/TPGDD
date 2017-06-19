@@ -34,12 +34,18 @@ namespace UberFrba.Login_Usuario
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void aceptar_Click(object sender, EventArgs e)
         {
-            if(  )
-            Form menu = new Menu.Menu(selectorRol.SelectedItem.ToString(), username);
-            menu.Show();
-            this.Close();
+            if (selectorRol.SelectedItem == null)
+            {
+                MessageBox.Show("Debe seleccionar un rol para seguir");
+            }
+            else
+            {
+                Form menu = new Menu.Menu(selectorRol.SelectedItem.ToString(), username);
+                menu.Show();
+                this.Close();
+            }
         }
 
         private void selectorRol_SelectedIndexChanged(object sender, EventArgs e)

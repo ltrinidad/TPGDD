@@ -30,7 +30,7 @@
         {
             this.selectorRol = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.aceptar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // comboBox1
@@ -53,20 +53,20 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(102, 132);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Aceptar";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.aceptar.Location = new System.Drawing.Point(102, 132);
+            this.aceptar.Name = "button1";
+            this.aceptar.Size = new System.Drawing.Size(75, 23);
+            this.aceptar.TabIndex = 2;
+            this.aceptar.Text = "Aceptar";
+            this.aceptar.UseVisualStyleBackColor = true;
+            this.aceptar.Click += new System.EventHandler(this.aceptar_Click);
             // 
             // Seleccionar_Rol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 201);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.aceptar);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.selectorRol);
             this.Name = "Seleccionar_Rol";
@@ -81,6 +81,6 @@
 
         private System.Windows.Forms.ComboBox selectorRol;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button aceptar;
     }
 }

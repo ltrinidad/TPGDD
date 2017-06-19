@@ -8,16 +8,21 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace UberFrba.Rendicion_Viajes
+namespace UberFrba.Rendicion_Al_Chofer
 {
-    public partial class Form1 : Form
+    public partial class Rendicion_Al_Chofer : Form
     {
-        public Form1()
+        public Rendicion_Al_Chofer()
         {
             InitializeComponent();
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
         {
 
         }

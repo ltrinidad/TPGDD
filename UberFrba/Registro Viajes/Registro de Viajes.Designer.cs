@@ -1,6 +1,6 @@
 ﻿namespace UberFrba.Registro_Viajes
 {
-    partial class Form1
+    partial class Registro_Viajes
     {
         /// <summary>
         /// Required designer variable.
@@ -203,6 +203,7 @@
             this.Controls.Add(this.textBox1);
             this.Name = "Form1";
             this.Text = "Registro de Viajes";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
