@@ -12,9 +12,15 @@ namespace UberFrba.Registro_Viajes
 {
     public partial class Registro_Viajes : Form
     {
-        public Registro_Viajes()
+
+        private String rol;
+        private String username;
+
+        public Registro_Viajes(String username, String rol)
         {
             InitializeComponent();
+            this.username = username;
+            this.rol = rol;
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -22,6 +28,7 @@ namespace UberFrba.Registro_Viajes
 
         }
 
+     
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
 

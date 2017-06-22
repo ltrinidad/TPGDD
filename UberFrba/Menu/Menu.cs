@@ -17,15 +17,18 @@ namespace UberFrba.Menu
     {   
         private String rol;
         private String username;
-
-        public Menu(String rol, String username)
+        private Funcionalidades funcionalidades; 
+ 
+        public Menu(String username, String rol)
         {
             InitializeComponent();
             this.rol = rol;
             this.username = username;
+            this.funcionalidades = new Funcionalidades(this.username, this.rol);
             this.cargarFuncionalidades();
+            
         }
-
+       
         private void Menu_Load(object sender, EventArgs e)
         {
         }
@@ -40,6 +43,7 @@ namespace UberFrba.Menu
             {
                 Funcionalidad func = (Funcionalidad) this.selectorFuncionalidades.SelectedItem;
                 func.abrirVentana();
+                this.Close();
             }
         }
 
@@ -57,14 +61,14 @@ namespace UberFrba.Menu
 
         private void cargarFuncionalidades()
         {
-            SqlDataReader funcionalidades = this.leerFuncionalidades();
+            SqlDataReader funcionalidadesReader = this.leerFuncionalidades();
 
-            while (funcionalidades.Read()) {
-                Funcionalidad funcAAgregar = Funcionalidades.ObtenerFuncionalidad(funcionalidades.GetByte(0));
+            while (funcionalidadesReader.Read()) {
+                Funcionalidad funcAAgregar = this.funcionalidades.obtenerFuncionalidad(funcionalidadesReader.GetByte(0));
                 this.selectorFuncionalidades.Items.Add(funcAAgregar);
             }
 
-            funcionalidades.Close();
+            funcionalidadesReader.Close();
         }
 
         private SqlDataReader leerFuncionalidades()

@@ -107,6 +107,7 @@
             this.Controls.Add(this.label1);
             this.Name = "Alta";
             this.Text = "Alta de Rol";
+            this.Load += new System.EventHandler(this.Alta_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

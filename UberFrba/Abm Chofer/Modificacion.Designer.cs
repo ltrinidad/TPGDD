@@ -250,6 +250,7 @@
             this.Controls.Add(this.label1);
             this.Name = "Modificacion";
             this.Text = "Modificacion de chofer";
+            this.Load += new System.EventHandler(this.Modificacion_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -16,6 +16,7 @@ namespace UberFrba.Login_Usuario
     {
 
         private String username;
+        private UberFrba.Menu.Menu menu;
 
         public Seleccionar_Rol(String username)
         {
@@ -23,6 +24,7 @@ namespace UberFrba.Login_Usuario
             this.username = username;            
             this.cargarRoles();
         }
+
 
         private void Seleccionar_Rol_Load(object sender, EventArgs e)
         {
@@ -36,16 +38,21 @@ namespace UberFrba.Login_Usuario
 
         private void aceptar_Click(object sender, EventArgs e)
         {
+            /*
             if (selectorRol.SelectedItem == null)
             {
                 MessageBox.Show("Debe seleccionar un rol para seguir");
             }
             else
             {
-                Form menu = new Menu.Menu(selectorRol.SelectedItem.ToString(), username);
+                Form menu = new Menu.Menu(username, selectorRol.SelectedItem.ToString());
                 menu.Show();
                 this.Close();
             }
+            */ 
+            Form menu = new Menu.Menu("admin", "Administrador");
+            menu.Show();
+            this.Close();
         }
 
         private void selectorRol_SelectedIndexChanged(object sender, EventArgs e)

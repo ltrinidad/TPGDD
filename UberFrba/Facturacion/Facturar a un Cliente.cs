@@ -12,9 +12,15 @@ namespace UberFrba.Facturacion_Cliente
 {
     public partial class Facturacion_Cliente : Form
     {
-        public Facturacion_Cliente()
+
+        private String username;
+        private String rol;
+
+        public Facturacion_Cliente(String username, String rol)
         {
             InitializeComponent();
+            this.rol = rol;
+            this.username = username;
         }
 
         private void label3_Click(object sender, EventArgs e)

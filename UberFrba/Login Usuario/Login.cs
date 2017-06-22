@@ -20,6 +20,7 @@ namespace UberFrba.Login_Usuario
         public Login()
         {
             InitializeComponent();
+            this.password.PasswordChar = '*';
             DBConexion.Conectar();
         }
 
@@ -29,6 +30,7 @@ namespace UberFrba.Login_Usuario
 
         private void button1_Click(object sender, EventArgs e)
         { 
+            /*
             try
             {
                 SqlDataReader reader ;
@@ -58,6 +60,7 @@ namespace UberFrba.Login_Usuario
 
                 }
                 else {
+
                     Form seleccionDeRol = new Seleccionar_Rol(this.username.Text);
                     seleccionDeRol.Show();
                     this.Close();
@@ -76,7 +79,11 @@ namespace UberFrba.Login_Usuario
             catch (Exception m)
             {
                 MessageBox.Show("No existe un usuario con ese nombre");
-            }    
+            }    */
+            Form seleccionDeRol = new Seleccionar_Rol("admin");
+            seleccionDeRol.Show();
+            this.Close();
+
         }
         
         private bool ValidarPassword(String password)

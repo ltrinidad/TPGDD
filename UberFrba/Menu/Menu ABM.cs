@@ -12,14 +12,24 @@ namespace UberFrba.Menu
 {
     public partial class Menu_ABM : Form
     {
-        public Menu_ABM()
+        private FuncionalidadABM funcionalidadABM;
+        private String username;
+        private String rol;
+
+        public Menu_ABM(String username, String rol, FuncionalidadABM funcionalidadABM)
         {
             InitializeComponent();
+            this.username = username;
+            this.rol = rol;
+            this.funcionalidadABM = funcionalidadABM;
+            this.labelTitulo.Text = "ABM " + rol;
+            this.cargarSelectorABM();
         }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
 
+        private void labelTitulo_Click(object sender, EventArgs e)
+        {
+           
         }
 
         private void Menu_ABM_Load(object sender, EventArgs e)
@@ -27,9 +37,48 @@ namespace UberFrba.Menu
 
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+
+        private void cargarSelectorABM() {
+            this.selectorABM.Items.Clear();
+            this.selectorABM.Items.Add("Alta");
+            this.selectorABM.Items.Add("Baja");
+            this.selectorABM.Items.Add("Modificar");
+        }
+
+        private void selectorABM_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // si selecciona Alta de automovil, acordarse de pasasrle el texto para el boton ("Crear Automovil") y el flag en true
+            
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (selectorABM.SelectedItem == null) {
+              MessageBox.Show("Debe seleccionar alguna opcion");
+            }else{
+                switch (selectorABM.SelectedItem.ToString()) {
+                    case "Alta" : 
+                        this.funcionalidadABM.abrirVentanaAlta();
+                        this.Close();
+                        break;
+                    case "Baja" :
+                        this.funcionalidadABM.abrirVentanaBaja();
+                        this.Close();
+                        break;
+                    case "Modificar":
+                        this.funcionalidadABM.abrirVentanaModificar();
+                        this.Close();
+                        break;
+                }
+            }
+            
+           
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Form menu = new Menu(this.username, this.rol);
+            menu.Show();
+            this.Close();
         }
     }
 }

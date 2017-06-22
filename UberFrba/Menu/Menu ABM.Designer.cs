@@ -28,45 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.labelTitulo = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.selectorABM = new System.Windows.Forms.ComboBox();
+            this.botonVolver = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // comboBox2
+            // labelTitulo
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
-            "Automovil",
-            "Chofer",
-            "Rol",
-            "Cliente",
-            "Turno"});
-            this.comboBox2.Location = new System.Drawing.Point(90, 52);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(121, 21);
-            this.comboBox2.TabIndex = 3;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(66, 23);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(177, 13);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Seleccione el elemento a modificar :";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
+            this.labelTitulo.AutoSize = true;
+            this.labelTitulo.Location = new System.Drawing.Point(118, 51);
+            this.labelTitulo.Name = "labelTitulo";
+            this.labelTitulo.Size = new System.Drawing.Size(49, 13);
+            this.labelTitulo.TabIndex = 5;
+            this.labelTitulo.Text = "ABM Rol";
+            this.labelTitulo.Click += new System.EventHandler(this.labelTitulo_Click);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(112, 169);
+            this.button1.Location = new System.Drawing.Point(163, 168);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 6;
             this.button1.Text = "Continuar";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label1
             // 
@@ -77,29 +64,39 @@
             this.label1.TabIndex = 8;
             this.label1.Text = "Seleccione Alta/Baja/Modificacion";
             // 
-            // comboBox1
+            // selectorABM
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.selectorABM.FormattingEnabled = true;
+            this.selectorABM.Items.AddRange(new object[] {
             "Alta ",
             "Baja",
             "Modificacion"});
-            this.comboBox1.Location = new System.Drawing.Point(90, 123);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 7;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.selectorABM.Location = new System.Drawing.Point(90, 123);
+            this.selectorABM.Name = "selectorABM";
+            this.selectorABM.Size = new System.Drawing.Size(121, 21);
+            this.selectorABM.TabIndex = 7;
+            this.selectorABM.SelectedIndexChanged += new System.EventHandler(this.selectorABM_SelectedIndexChanged);
+            // 
+            // botonVolver
+            // 
+            this.botonVolver.Location = new System.Drawing.Point(57, 168);
+            this.botonVolver.Name = "botonVolver";
+            this.botonVolver.Size = new System.Drawing.Size(75, 23);
+            this.botonVolver.TabIndex = 9;
+            this.botonVolver.Text = "Volver";
+            this.botonVolver.UseVisualStyleBackColor = true;
+            this.botonVolver.Click += new System.EventHandler(this.button2_Click);
             // 
             // Menu_ABM
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(302, 215);
+            this.Controls.Add(this.botonVolver);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.selectorABM);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.comboBox2);
+            this.Controls.Add(this.labelTitulo);
             this.Name = "Menu_ABM";
             this.Text = "Menu ABM";
             this.Load += new System.EventHandler(this.Menu_ABM_Load);
@@ -110,11 +107,11 @@
 
         #endregion
 
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label labelTitulo;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox selectorABM;
+        private System.Windows.Forms.Button botonVolver;
 
     }
 }

@@ -12,9 +12,15 @@ namespace UberFrba.Alta_de_Usuario
 {
     public partial class Alta_de_Usuario : Form
     {
-        public Alta_de_Usuario()
+
+        private String rol;
+        private String username;
+
+        public Alta_de_Usuario(String username, String rol)
         {
             InitializeComponent();
+            this.rol = rol;
+            this.username = username;
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -31,5 +37,8 @@ namespace UberFrba.Alta_de_Usuario
         {
 
         }
+
+       
+
     }
 }

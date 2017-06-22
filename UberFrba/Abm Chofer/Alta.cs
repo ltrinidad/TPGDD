@@ -16,5 +16,10 @@ namespace UberFrba.Abm_Chofer
         {
             InitializeComponent();
         }
+
+        private void Alta_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

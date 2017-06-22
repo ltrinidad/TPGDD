@@ -12,9 +12,15 @@ namespace UberFrba.Facturacion_Cliente
 {
     public partial class Listado_Estadistico : Form
     {
-        public Listado_Estadistico()
+
+        private String username;
+        private String rol;
+
+        public Listado_Estadistico(String username, String rol)
         {
             InitializeComponent();
+            this.rol = rol;
+            this.username = username;
         }
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)

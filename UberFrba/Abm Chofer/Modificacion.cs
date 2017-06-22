@@ -16,5 +16,11 @@ namespace UberFrba.Abm_Chofer
         {
             InitializeComponent();
         }
+
+        private void Modificacion_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
+

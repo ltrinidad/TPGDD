@@ -20,9 +20,13 @@ namespace UberFrba.Abm_Automovil
             InitializeComponent();
             button1.Text = textoDelBoton;
             this.puedeDarDeAlta = puedeDarDeAlta;
+            if (puedeDarDeAlta)
+            {
+                this.Text = "Alta de Automoviles";
+            }
+            else this.Text = "Modificacion de Automoviles";
         }
 
-      
 
         private void limpiar_Click(object sender, EventArgs e)
         {
@@ -59,6 +63,11 @@ namespace UberFrba.Abm_Automovil
         }
 
         private void Alta_o_Modificacion_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
         {
 
         }

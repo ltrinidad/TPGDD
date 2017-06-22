@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.modificar = new System.Windows.Forms.Button();
             this.baja = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.numeroChoferBM = new System.Windows.Forms.TextBox();
@@ -51,16 +50,6 @@
             this.button5 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // modificar
-            // 
-            this.modificar.Location = new System.Drawing.Point(290, 362);
-            this.modificar.Name = "modificar";
-            this.modificar.Size = new System.Drawing.Size(117, 23);
-            this.modificar.TabIndex = 24;
-            this.modificar.Text = "Modificar";
-            this.modificar.UseVisualStyleBackColor = true;
-            this.modificar.Click += new System.EventHandler(this.modificar_Click);
             // 
             // baja
             // 
@@ -237,7 +226,6 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.marcaBM);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.modificar);
             this.Controls.Add(this.baja);
             this.Controls.Add(this.label4);
             this.Name = "Baja_y_Modificacion";
@@ -250,7 +238,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Button modificar;
         private System.Windows.Forms.Button baja;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox numeroChoferBM;

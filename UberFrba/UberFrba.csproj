@@ -51,11 +51,11 @@
     <Compile Include="Abm Automovil\Alta o Modificacion.Designer.cs">
       <DependentUpon>Alta o Modificacion.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Automovil\Baja y Modificacion.cs">
+    <Compile Include="Abm Automovil\Baja.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Automovil\Baja y Modificacion.Designer.cs">
-      <DependentUpon>Baja y Modificacion.cs</DependentUpon>
+    <Compile Include="Abm Automovil\Baja.Designer.cs">
+      <DependentUpon>Baja.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Chofer\Alta.cs">
       <SubType>Form</SubType>
@@ -163,6 +163,7 @@
     </Compile>
     <Compile Include="Login Usuario\UsuarioDeshabilitadoException.cs" />
     <Compile Include="Menu\Funcionalidad.cs" />
+    <Compile Include="Menu\FuncionalidadABM.cs" />
     <Compile Include="Menu\Funcionalidades.cs" />
     <Compile Include="Menu\Menu ABM.cs">
       <SubType>Form</SubType>
@@ -205,8 +206,8 @@
     <EmbeddedResource Include="Abm Automovil\Alta o Modificacion.resx">
       <DependentUpon>Alta o Modificacion.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Abm Automovil\Baja y Modificacion.resx">
-      <DependentUpon>Baja y Modificacion.cs</DependentUpon>
+    <EmbeddedResource Include="Abm Automovil\Baja.resx">
+      <DependentUpon>Baja.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Chofer\Alta.resx">
       <DependentUpon>Alta.cs</DependentUpon>

@@ -12,6 +12,8 @@ namespace UberFrba.Menu
         public short codigo;
         public String nombre;        
         private Form ventana;
+        private String username;
+        private String rol;
 
         public Funcionalidad(short codigo, String nombre, Form ventana)
         {
@@ -20,13 +22,14 @@ namespace UberFrba.Menu
             this.ventana = ventana;
         }
 
-        public void abrirVentana() { 
+        public void abrirVentana() {
             ventana.Show();
         }
 
         public override string ToString() {
             return nombre;
         }
+
     }
 }
 
