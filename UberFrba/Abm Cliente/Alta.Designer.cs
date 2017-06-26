@@ -51,6 +51,7 @@
             this.label10 = new System.Windows.Forms.Label();
             this.textBox9 = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
+            this.volver = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -195,7 +196,7 @@
             // 
             this.button1.Location = new System.Drawing.Point(207, 297);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(112, 54);
+            this.button1.Size = new System.Drawing.Size(112, 38);
             this.button1.TabIndex = 19;
             this.button1.Text = "Crear cliente";
             this.button1.UseVisualStyleBackColor = true;
@@ -235,18 +236,29 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(207, 366);
+            this.button2.Location = new System.Drawing.Point(207, 344);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(109, 32);
+            this.button2.Size = new System.Drawing.Size(112, 32);
             this.button2.TabIndex = 22;
             this.button2.Text = "Limpiar";
             this.button2.UseVisualStyleBackColor = true;
+            // 
+            // volver
+            // 
+            this.volver.Location = new System.Drawing.Point(207, 384);
+            this.volver.Name = "volver";
+            this.volver.Size = new System.Drawing.Size(112, 35);
+            this.volver.TabIndex = 23;
+            this.volver.Text = "Volver";
+            this.volver.UseVisualStyleBackColor = true;
+            this.volver.Click += new System.EventHandler(this.volver_Click);
             // 
             // Alta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(369, 420);
+            this.ClientSize = new System.Drawing.Size(369, 461);
+            this.Controls.Add(this.volver);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.textBox10);
             this.Controls.Add(this.label11);
@@ -302,5 +314,6 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox textBox9;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button volver;
     }
 }

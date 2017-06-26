@@ -41,5 +41,10 @@ namespace UberFrba.Abm_Turno
         {
 
         }
+
+        private void Alta_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

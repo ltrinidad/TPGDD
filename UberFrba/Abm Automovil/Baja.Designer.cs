@@ -48,12 +48,13 @@
             this.habilitado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.seleccionar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.button5 = new System.Windows.Forms.Button();
+            this.volver = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // baja
             // 
-            this.baja.Location = new System.Drawing.Point(164, 362);
+            this.baja.Location = new System.Drawing.Point(261, 362);
             this.baja.Name = "baja";
             this.baja.Size = new System.Drawing.Size(119, 23);
             this.baja.TabIndex = 23;
@@ -209,11 +210,22 @@
             this.button5.Text = "Rehabilitar";
             this.button5.UseVisualStyleBackColor = true;
             // 
+            // volver
+            // 
+            this.volver.Location = new System.Drawing.Point(143, 362);
+            this.volver.Name = "volver";
+            this.volver.Size = new System.Drawing.Size(75, 23);
+            this.volver.TabIndex = 42;
+            this.volver.Text = "Volver";
+            this.volver.UseVisualStyleBackColor = true;
+            this.volver.Click += new System.EventHandler(this.volver_Click);
+            // 
             // Baja_y_Modificacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(717, 405);
+            this.Controls.Add(this.volver);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.button4);
@@ -258,5 +270,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn habilitado;
         private System.Windows.Forms.DataGridViewButtonColumn seleccionar;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button volver;
     }
 }

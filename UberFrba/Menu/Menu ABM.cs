@@ -15,14 +15,16 @@ namespace UberFrba.Menu
         private FuncionalidadABM funcionalidadABM;
         private String username;
         private String rol;
+        private String titulo;
 
-        public Menu_ABM(String username, String rol, FuncionalidadABM funcionalidadABM)
+        public Menu_ABM(String titulo, String username, String rol, FuncionalidadABM funcionalidadABM)
         {
             InitializeComponent();
+            this.titulo = titulo;
             this.username = username;
             this.rol = rol;
             this.funcionalidadABM = funcionalidadABM;
-            this.labelTitulo.Text = "ABM " + rol;
+            this.labelTitulo.Text = "ABM " + titulo;
             this.cargarSelectorABM();
         }
 
@@ -54,13 +56,13 @@ namespace UberFrba.Menu
         {
             if (selectorABM.SelectedItem == null) {
               MessageBox.Show("Debe seleccionar alguna opcion");
-            }else{
+            } else {
                 switch (selectorABM.SelectedItem.ToString()) {
-                    case "Alta" : 
+                    case "Alta": 
                         this.funcionalidadABM.abrirVentanaAlta();
                         this.Close();
                         break;
-                    case "Baja" :
+                    case "Baja":
                         this.funcionalidadABM.abrirVentanaBaja();
                         this.Close();
                         break;
@@ -70,8 +72,6 @@ namespace UberFrba.Menu
                         break;
                 }
             }
-            
-           
         }
 
         private void button2_Click(object sender, EventArgs e)

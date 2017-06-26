@@ -12,14 +12,31 @@ namespace UberFrba.Abm_Rol
 {
     public partial class Modificacion : Form
     {
-        public Modificacion()
+        private String username;
+        private String rol;
+
+        public Modificacion(String username, String rol)
         {
             InitializeComponent();
+            this.username = username;
+            this.rol = rol;
         }
 
         private void label2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void Modificacion_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void volver_Click(object sender, EventArgs e)
+        {
+            Form menu = new Menu.Menu(this.username, this.rol);
+            menu.Show();
+            this.Close();
         }
     }
 }

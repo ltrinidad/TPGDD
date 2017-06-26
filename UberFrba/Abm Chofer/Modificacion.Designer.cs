@@ -49,6 +49,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.volver = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // dateTimePicker1
@@ -222,11 +223,22 @@
             this.label1.TabIndex = 47;
             this.label1.Text = "Nombre :";
             // 
+            // volver
+            // 
+            this.volver.Location = new System.Drawing.Point(54, 366);
+            this.volver.Name = "volver";
+            this.volver.Size = new System.Drawing.Size(85, 37);
+            this.volver.TabIndex = 70;
+            this.volver.Text = "Volver";
+            this.volver.UseVisualStyleBackColor = true;
+            this.volver.Click += new System.EventHandler(this.volver_Click);
+            // 
             // Modificacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(399, 426);
+            this.Controls.Add(this.volver);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -279,5 +291,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button volver;
     }
 }

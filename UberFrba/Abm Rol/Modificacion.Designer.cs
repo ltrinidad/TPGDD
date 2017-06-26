@@ -39,6 +39,7 @@
             this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.button2 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
+            this.volver = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -94,7 +95,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(280, 249);
+            this.button1.Location = new System.Drawing.Point(328, 249);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(117, 23);
             this.button1.TabIndex = 12;
@@ -133,27 +134,38 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(42, 249);
+            this.button2.Location = new System.Drawing.Point(94, 249);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(109, 23);
+            this.button2.Size = new System.Drawing.Size(105, 23);
             this.button2.TabIndex = 15;
             this.button2.Text = "Limpiar";
             this.button2.UseVisualStyleBackColor = true;
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(157, 249);
+            this.button5.Location = new System.Drawing.Point(205, 249);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(119, 23);
             this.button5.TabIndex = 41;
             this.button5.Text = "Rehabilitar";
             this.button5.UseVisualStyleBackColor = true;
             // 
+            // volver
+            // 
+            this.volver.Location = new System.Drawing.Point(13, 249);
+            this.volver.Name = "volver";
+            this.volver.Size = new System.Drawing.Size(75, 23);
+            this.volver.TabIndex = 42;
+            this.volver.Text = "Volver";
+            this.volver.UseVisualStyleBackColor = true;
+            this.volver.Click += new System.EventHandler(this.volver_Click);
+            // 
             // Modificacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(457, 319);
+            this.Controls.Add(this.volver);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.checkedListBox1);
@@ -167,6 +179,7 @@
             this.Controls.Add(this.label1);
             this.Name = "Modificacion";
             this.Text = "Modificacion de Rol";
+            this.Load += new System.EventHandler(this.Modificacion_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -185,5 +198,6 @@
         private System.Windows.Forms.CheckedListBox checkedListBox1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button volver;
     }
 }

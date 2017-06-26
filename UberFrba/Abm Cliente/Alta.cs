@@ -12,9 +12,19 @@ namespace UberFrba.Abm_Cliente
 {
     public partial class Alta : Form
     {
+        private string username;
+        private string rol;
+
         public Alta()
         {
+            
+        }
+
+        public Alta(string username, string rol)
+        {
             InitializeComponent();
+            this.username = username;
+            this.rol = rol;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -25,6 +35,13 @@ namespace UberFrba.Abm_Cliente
         private void label11_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void volver_Click(object sender, EventArgs e)
+        {
+            Form menu = new Menu.Menu(this.username, this.rol);
+            menu.Show();
+            this.Close();
         }
     }
 }

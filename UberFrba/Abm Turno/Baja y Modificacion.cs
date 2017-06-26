@@ -21,5 +21,15 @@ namespace UberFrba.Abm_Turno
         {
 
         }
+
+        private void volver_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void Baja_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

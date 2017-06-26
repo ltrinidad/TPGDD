@@ -12,9 +12,20 @@ namespace UberFrba.Abm_Rol
 {
     public partial class Baja_Rol : Form
     {
-        public Baja_Rol()
+        private String username;
+        private String rol;
+        public Baja_Rol(String username, String rol)
         {
             InitializeComponent();
+            this.username = username;
+            this.rol = rol;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Form menu = new Menu.Menu(this.username, this.rol);
+            menu.Show();
+            this.Close();
         }
     }
 }

@@ -12,9 +12,14 @@ namespace UberFrba.Abm_Automovil
 {
     public partial class Baja_y_Modificacion : Form 
     {
-        public Baja_y_Modificacion()
+        private string username;
+        private string rol;
+
+        public Baja_y_Modificacion(string p1, string p2)
         {
             InitializeComponent();
+            this.username = p1;
+            this.rol = p2;
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -40,8 +45,15 @@ namespace UberFrba.Abm_Automovil
 
         private void modificar_Click(object sender, EventArgs e)
         {
-            Form modificar = new Alta_o_Modificacion("Guardar cambios", false);
+            Form modificar = new Alta_o_Modificacion("Guardar cambios", false, this.username, this.rol);
             modificar.Show();
+        }
+
+        private void volver_Click(object sender, EventArgs e)
+        {
+            Form menu = new Menu.Menu(this.username, this.rol);
+            menu.Show();
+            this.Close();
         }
     }
 }

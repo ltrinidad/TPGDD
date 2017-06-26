@@ -52,6 +52,7 @@
             this.nroPiso = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewButtonColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.button5 = new System.Windows.Forms.Button();
+            this.volver = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
             // 
@@ -114,7 +115,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(171, 352);
+            this.button1.Location = new System.Drawing.Point(236, 352);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(119, 23);
             this.button1.TabIndex = 13;
@@ -124,7 +125,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(296, 352);
+            this.button2.Location = new System.Drawing.Point(361, 352);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(117, 23);
             this.button2.TabIndex = 14;
@@ -227,18 +228,29 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(419, 352);
+            this.button5.Location = new System.Drawing.Point(484, 352);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(119, 23);
             this.button5.TabIndex = 40;
             this.button5.Text = "Rehabilitar";
             this.button5.UseVisualStyleBackColor = true;
             // 
+            // volver
+            // 
+            this.volver.Location = new System.Drawing.Point(155, 352);
+            this.volver.Name = "volver";
+            this.volver.Size = new System.Drawing.Size(75, 23);
+            this.volver.TabIndex = 41;
+            this.volver.Text = "Volver";
+            this.volver.UseVisualStyleBackColor = true;
+            this.volver.Click += new System.EventHandler(this.volver_Click);
+            // 
             // Baja
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(739, 396);
+            this.Controls.Add(this.volver);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.button4);
@@ -286,5 +298,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn nroPiso;
         private System.Windows.Forms.DataGridViewButtonColumn dataGridViewButtonColumn1;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button volver;
     }
 }

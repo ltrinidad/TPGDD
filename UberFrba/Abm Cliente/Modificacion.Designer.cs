@@ -51,6 +51,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.volver = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBox10
@@ -217,7 +218,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(185, 297);
+            this.button1.Location = new System.Drawing.Point(185, 288);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(112, 38);
             this.button1.TabIndex = 44;
@@ -226,7 +227,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(185, 356);
+            this.button2.Location = new System.Drawing.Point(185, 334);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(112, 37);
             this.button2.TabIndex = 45;
@@ -240,11 +241,22 @@
             this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
             this.dateTimePicker1.TabIndex = 46;
             // 
+            // volver
+            // 
+            this.volver.Location = new System.Drawing.Point(185, 377);
+            this.volver.Name = "volver";
+            this.volver.Size = new System.Drawing.Size(112, 35);
+            this.volver.TabIndex = 47;
+            this.volver.Text = "Volver";
+            this.volver.UseVisualStyleBackColor = true;
+            this.volver.Click += new System.EventHandler(this.volver_Click);
+            // 
             // Modificacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(411, 424);
+            this.Controls.Add(this.volver);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -300,6 +312,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.Button volver;
 
     }
 }

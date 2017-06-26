@@ -14,8 +14,11 @@ namespace UberFrba.Abm_Automovil
     {
 
         private bool puedeDarDeAlta;
+        private string textoDelBoton;
+        private string username;
+        private string rol;
 
-        public Alta_o_Modificacion(string textoDelBoton, bool puedeDarDeAlta)
+        public Alta_o_Modificacion(string textoDelBoton, bool puedeDarDeAlta, string username, string rol)
         {
             InitializeComponent();
             button1.Text = textoDelBoton;
@@ -25,6 +28,8 @@ namespace UberFrba.Abm_Automovil
                 this.Text = "Alta de Automoviles";
             }
             else this.Text = "Modificacion de Automoviles";
+            this.username = username;
+            this.rol = rol;
         }
 
 
@@ -35,7 +40,6 @@ namespace UberFrba.Abm_Automovil
             this.modelo.ResetText();
             this.patente.ResetText();
             this.numeroChofer.ResetText();
-            
         }
 
         private void turno_TextChanged(object sender, EventArgs e){
@@ -69,7 +73,9 @@ namespace UberFrba.Abm_Automovil
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            Form menu = new Menu.Menu(this.username, this.rol);
+            menu.Show();
+            this.Close();
         }
 
       
