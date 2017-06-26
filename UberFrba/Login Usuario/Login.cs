@@ -29,7 +29,7 @@ namespace UberFrba.Login_Usuario
         }
 
         private void button1_Click(object sender, EventArgs e)
-        { 
+        {
             /*
             try
             {
@@ -76,10 +76,17 @@ namespace UberFrba.Login_Usuario
             {
                 MessageBox.Show(ud.Message);    
             }
+            catch (SqlException sqle){
+                   MessageBox.Show("No se pudo deshabilitar el usuario");
+            }
             catch (Exception m)
             {
                 MessageBox.Show("No existe un usuario con ese nombre");
-            }    */
+            }
+              
+             */
+
+
             Form seleccionDeRol = new Seleccionar_Rol("admin");
             seleccionDeRol.Show();
             this.Close();

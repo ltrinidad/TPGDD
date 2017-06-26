@@ -44,6 +44,7 @@
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
+            this.volver = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // comboBox1
@@ -164,7 +165,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(72, 338);
+            this.button3.Location = new System.Drawing.Point(208, 338);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(126, 23);
             this.button3.TabIndex = 25;
@@ -173,18 +174,29 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(299, 338);
+            this.button4.Location = new System.Drawing.Point(372, 338);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(126, 23);
             this.button4.TabIndex = 26;
             this.button4.Text = "Registrar";
             this.button4.UseVisualStyleBackColor = true;
             // 
-            // Form1
+            // volver
+            // 
+            this.volver.Location = new System.Drawing.Point(45, 338);
+            this.volver.Name = "volver";
+            this.volver.Size = new System.Drawing.Size(126, 23);
+            this.volver.TabIndex = 27;
+            this.volver.Text = "Volver";
+            this.volver.UseVisualStyleBackColor = true;
+            this.volver.Click += new System.EventHandler(this.volver_Click);
+            // 
+            // Registro_Viajes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(540, 386);
+            this.Controls.Add(this.volver);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.label7);
@@ -201,7 +213,7 @@
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBox1);
-            this.Name = "Form1";
+            this.Name = "Registro_Viajes";
             this.Text = "Registro de Viajes";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
@@ -227,6 +239,7 @@
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button volver;
 
     }
 }

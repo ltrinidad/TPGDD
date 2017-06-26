@@ -22,7 +22,7 @@ namespace UberFrba.Abm_Chofer
             this.rol = rol;
         }
 
-        private void Alta_Load(object sender, EventArgs e)
+        private void Alta_o_Modificacion_Load(object sender, EventArgs e)
         {
 
         }
@@ -32,6 +32,12 @@ namespace UberFrba.Abm_Chofer
             Form menu = new Menu.Menu(this.username, this.rol);
             menu.Show();
             this.Close();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+          
+           /*hacer insert*/ 
         }
     }
 }

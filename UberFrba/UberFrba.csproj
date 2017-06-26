@@ -57,41 +57,29 @@
     <Compile Include="Abm Automovil\Baja.Designer.cs">
       <DependentUpon>Baja.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Chofer\Alta.cs">
+    <Compile Include="Abm Chofer\Alta o Modificacion.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Chofer\Alta.Designer.cs">
-      <DependentUpon>Alta.cs</DependentUpon>
+    <Compile Include="Abm Chofer\Alta o Modificacion.Designer.cs">
+      <DependentUpon>Alta o Modificacion.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Chofer\Baja y Modificacion.cs">
+    <Compile Include="Abm Chofer\Baja .cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Chofer\Baja y Modificacion.Designer.cs">
-      <DependentUpon>Baja y Modificacion.cs</DependentUpon>
+    <Compile Include="Abm Chofer\Baja .Designer.cs">
+      <DependentUpon>Baja .cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Chofer\Modificacion.cs">
+    <Compile Include="Abm Cliente\Alta o Modificacion.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Chofer\Modificacion.Designer.cs">
-      <DependentUpon>Modificacion.cs</DependentUpon>
+    <Compile Include="Abm Cliente\Alta o Modificacion.Designer.cs">
+      <DependentUpon>Alta o Modificacion.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Cliente\Alta.cs">
+    <Compile Include="Abm Cliente\Baja.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Cliente\Alta.Designer.cs">
-      <DependentUpon>Alta.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Abm Cliente\Baja y Modificacion.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Abm Cliente\Baja y Modificacion.Designer.cs">
-      <DependentUpon>Baja y Modificacion.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Abm Cliente\Modificacion.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Abm Cliente\Modificacion.Designer.cs">
-      <DependentUpon>Modificacion.cs</DependentUpon>
+    <Compile Include="Abm Cliente\Baja.Designer.cs">
+      <DependentUpon>Baja.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Rol\Alta.cs">
       <SubType>Form</SubType>
@@ -111,23 +99,17 @@
     <Compile Include="Abm Rol\Modificacion.Designer.cs">
       <DependentUpon>Modificacion.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Turno\Alta.cs">
+    <Compile Include="Abm Turno\Alta o Modificacion.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Turno\Alta.Designer.cs">
-      <DependentUpon>Alta.cs</DependentUpon>
+    <Compile Include="Abm Turno\Alta o Modificacion.Designer.cs">
+      <DependentUpon>Alta o Modificacion.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Turno\Baja y Modificacion.cs">
+    <Compile Include="Abm Turno\Baja.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Turno\Baja y Modificacion.Designer.cs">
-      <DependentUpon>Baja y Modificacion.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Abm Turno\Modificacion.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Abm Turno\Modificacion.Designer.cs">
-      <DependentUpon>Modificacion.cs</DependentUpon>
+    <Compile Include="Abm Turno\Baja.Designer.cs">
+      <DependentUpon>Baja.cs</DependentUpon>
     </Compile>
     <Compile Include="Alta de Usuario\Alta de Usuario.cs">
       <SubType>Form</SubType>
@@ -209,23 +191,17 @@
     <EmbeddedResource Include="Abm Automovil\Baja.resx">
       <DependentUpon>Baja.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Abm Chofer\Alta.resx">
-      <DependentUpon>Alta.cs</DependentUpon>
+    <EmbeddedResource Include="Abm Chofer\Alta o Modificacion.resx">
+      <DependentUpon>Alta o Modificacion.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Abm Chofer\Baja y Modificacion.resx">
-      <DependentUpon>Baja y Modificacion.cs</DependentUpon>
+    <EmbeddedResource Include="Abm Chofer\Baja .resx">
+      <DependentUpon>Baja .cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Abm Chofer\Modificacion.resx">
-      <DependentUpon>Modificacion.cs</DependentUpon>
+    <EmbeddedResource Include="Abm Cliente\Alta o Modificacion.resx">
+      <DependentUpon>Alta o Modificacion.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Abm Cliente\Alta.resx">
-      <DependentUpon>Alta.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Abm Cliente\Baja y Modificacion.resx">
-      <DependentUpon>Baja y Modificacion.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Abm Cliente\Modificacion.resx">
-      <DependentUpon>Modificacion.cs</DependentUpon>
+    <EmbeddedResource Include="Abm Cliente\Baja.resx">
+      <DependentUpon>Baja.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Rol\Alta.resx">
       <DependentUpon>Alta.cs</DependentUpon>
@@ -236,14 +212,11 @@
     <EmbeddedResource Include="Abm Rol\Modificacion.resx">
       <DependentUpon>Modificacion.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Abm Turno\Alta.resx">
-      <DependentUpon>Alta.cs</DependentUpon>
+    <EmbeddedResource Include="Abm Turno\Alta o Modificacion.resx">
+      <DependentUpon>Alta o Modificacion.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Abm Turno\Baja y Modificacion.resx">
-      <DependentUpon>Baja y Modificacion.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Abm Turno\Modificacion.resx">
-      <DependentUpon>Modificacion.cs</DependentUpon>
+    <EmbeddedResource Include="Abm Turno\Baja.resx">
+      <DependentUpon>Baja.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Alta de Usuario\Alta de Usuario.resx">
       <DependentUpon>Alta de Usuario.cs</DependentUpon>

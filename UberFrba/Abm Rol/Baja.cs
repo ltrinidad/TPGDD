@@ -27,5 +27,10 @@ namespace UberFrba.Abm_Rol
             menu.Show();
             this.Close();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            /*HACER UN RRECONTRA TRIGGER (porque hay que quitarle el rol inhabilitado a los usuarios que lo tengan)*/
+        }
     }
 }

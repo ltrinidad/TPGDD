@@ -35,15 +35,15 @@ namespace UberFrba.Menu
         }
 
         private Menu_ABM crearABMCliente() {
-            return new Menu_ABM("Cliente", this.username, this.rol, new FuncionalidadABM(new Abm_Cliente.Alta(this.username, this.rol), new Abm_Cliente.Baja(this.username, this.rol), new Abm_Cliente.Modificacion(this.username, this.rol)));
+            return new Menu_ABM("Cliente", this.username, this.rol, new FuncionalidadABM(new Abm_Cliente.Alta(this.username, this.rol), new Abm_Cliente.Baja_o_Modificacion(true, this.username, this.rol), new Abm_Cliente.Baja_o_Modificacion(false, this.username, this.rol)));
         }
 
         private Menu_ABM crearABMAuto() {
-            return new Menu_ABM("Automovil", this.username, this.rol, new FuncionalidadABM(new Abm_Automovil.Alta_o_Modificacion("Carga de Automovil", true, this.username, this.rol), new Abm_Automovil.Baja_y_Modificacion(this.username, this.rol), new Abm_Automovil.Alta_o_Modificacion("Modificar Automovil", false, this.username, this.rol)));
+            return new Menu_ABM("Automovil", this.username, this.rol, new FuncionalidadABM(new Abm_Automovil.Alta(this.username, this.rol), new Abm_Automovil.Baja_o_Modificacion(true, this.username, this.rol), new Abm_Automovil.Baja_o_Modificacion(false, this.username, this.rol)));
         }
 
         private Menu_ABM crearABMChofer() {
-            return new Menu_ABM("Chofer", this.username, this.rol, new FuncionalidadABM(new Abm_Chofer.Alta(this.username, this.rol), new Abm_Chofer.Baja_y_Modificacion(this.username, this.rol), new Abm_Chofer.Modificacion(this.username, this.rol)));
+            return new Menu_ABM("Chofer", this.username, this.rol, new FuncionalidadABM(new Abm_Chofer.Alta(this.username, this.rol), new Abm_Chofer.Baja_o_Modificacion(true, this.username, this.rol), new Abm_Chofer.Baja_o_Modificacion(false, this.username, this.rol)));
         }
 
         public Funcionalidad obtenerFuncionalidad(short codigo)

@@ -1,6 +1,6 @@
 ﻿namespace UberFrba.Abm_Automovil
 {
-    partial class Baja_y_Modificacion
+    partial class Baja_o_Modificacion
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.baja = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.numeroChoferBM = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -47,20 +46,10 @@
             this.numeroChofer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.habilitado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.seleccionar = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.button5 = new System.Windows.Forms.Button();
             this.volver = new System.Windows.Forms.Button();
+            this.bajaOModificacion = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // baja
-            // 
-            this.baja.Location = new System.Drawing.Point(261, 362);
-            this.baja.Name = "baja";
-            this.baja.Size = new System.Drawing.Size(119, 23);
-            this.baja.TabIndex = 23;
-            this.baja.Text = "Dar de Baja";
-            this.baja.UseVisualStyleBackColor = true;
-            this.baja.Click += new System.EventHandler(this.baja_Click);
             // 
             // label4
             // 
@@ -109,6 +98,7 @@
             this.modeloBM.Name = "modeloBM";
             this.modeloBM.Size = new System.Drawing.Size(100, 20);
             this.modeloBM.TabIndex = 28;
+            this.modeloBM.TextChanged += new System.EventHandler(this.modeloBM_TextChanged);
             // 
             // label2
             // 
@@ -201,18 +191,9 @@
             this.seleccionar.HeaderText = "Seleccionar";
             this.seleccionar.Name = "seleccionar";
             // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(413, 362);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(119, 23);
-            this.button5.TabIndex = 41;
-            this.button5.Text = "Rehabilitar";
-            this.button5.UseVisualStyleBackColor = true;
-            // 
             // volver
             // 
-            this.volver.Location = new System.Drawing.Point(143, 362);
+            this.volver.Location = new System.Drawing.Point(225, 362);
             this.volver.Name = "volver";
             this.volver.Size = new System.Drawing.Size(75, 23);
             this.volver.TabIndex = 42;
@@ -220,13 +201,23 @@
             this.volver.UseVisualStyleBackColor = true;
             this.volver.Click += new System.EventHandler(this.volver_Click);
             // 
-            // Baja_y_Modificacion
+            // bajaOModificacion
+            // 
+            this.bajaOModificacion.Location = new System.Drawing.Point(380, 362);
+            this.bajaOModificacion.Name = "bajaOModificacion";
+            this.bajaOModificacion.Size = new System.Drawing.Size(105, 23);
+            this.bajaOModificacion.TabIndex = 43;
+            this.bajaOModificacion.Text = "Baja/Modificacion";
+            this.bajaOModificacion.UseVisualStyleBackColor = true;
+            this.bajaOModificacion.Click += new System.EventHandler(this.bajaOModificacion_Click);
+            // 
+            // Baja
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(717, 405);
+            this.Controls.Add(this.bajaOModificacion);
             this.Controls.Add(this.volver);
-            this.Controls.Add(this.button5);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
@@ -238,10 +229,10 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.marcaBM);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.baja);
             this.Controls.Add(this.label4);
-            this.Name = "Baja_y_Modificacion";
+            this.Name = "Baja";
             this.Text = "Selección de Automóvil";
+            this.Load += new System.EventHandler(this.Baja_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -269,7 +260,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn numeroChofer;
         private System.Windows.Forms.DataGridViewTextBoxColumn habilitado;
         private System.Windows.Forms.DataGridViewButtonColumn seleccionar;
-        private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button volver;
+        private System.Windows.Forms.Button bajaOModificacion;
     }
 }

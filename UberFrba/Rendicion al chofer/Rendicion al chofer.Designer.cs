@@ -39,6 +39,7 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
+            this.volver = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // dateTimePicker1
@@ -125,18 +126,29 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(119, 245);
+            this.button2.Location = new System.Drawing.Point(225, 244);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(157, 23);
             this.button2.TabIndex = 31;
             this.button2.Text = "Guardar rendicion";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // Form1
+            // volver
+            // 
+            this.volver.Location = new System.Drawing.Point(46, 244);
+            this.volver.Name = "volver";
+            this.volver.Size = new System.Drawing.Size(157, 23);
+            this.volver.TabIndex = 32;
+            this.volver.Text = "Volver";
+            this.volver.UseVisualStyleBackColor = true;
+            this.volver.Click += new System.EventHandler(this.volver_Click);
+            // 
+            // Rendicion_Al_Chofer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(411, 299);
+            this.Controls.Add(this.volver);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
@@ -148,7 +160,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dateTimePicker1);
-            this.Name = "Form1";
+            this.Name = "Rendicion_Al_Chofer";
             this.Text = "Rendicion de viaje";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
@@ -169,5 +181,6 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button volver;
     }
 }

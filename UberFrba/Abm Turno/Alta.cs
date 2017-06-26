@@ -10,11 +10,30 @@ using System.Windows.Forms;
 
 namespace UberFrba.Abm_Turno
 {
-    public partial class Alta : Form
+    public partial class Alta_o_Modificacion : Form
     {
-        public Alta()
+
+        private string username;
+        private string rol;
+        private bool puedeDarDeAlta;
+
+        public Alta_o_Modificacion(bool puedeDarDeAlta, string username, string rol)
         {
             InitializeComponent();
+            this.username = username;
+            this.rol = rol;
+            this.puedeDarDeAlta = puedeDarDeAlta;
+            if (puedeDarDeAlta)
+            {
+                this.Text = "Alta de Turno";
+                this.button1.Text = "Crear Turno";
+            }
+            else
+            {
+                this.Text = "Modificacion de Turno";
+                this.button1.Text = "Guardar Turno";
+            }
+
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -42,9 +61,16 @@ namespace UberFrba.Abm_Turno
 
         }
 
-        private void Alta_Load(object sender, EventArgs e)
+        private void Alta_o_Modificacion_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void volver_Click(object sender, EventArgs e)
+        {
+            Form menu = new Menu.Menu(this.username, this.rol);
+            menu.Show();
+            this.Close();
         }
     }
 }

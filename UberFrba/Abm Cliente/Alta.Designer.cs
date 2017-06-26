@@ -200,6 +200,7 @@
             this.button1.TabIndex = 19;
             this.button1.Text = "Crear cliente";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // textBox10
             // 
@@ -253,7 +254,7 @@
             this.volver.UseVisualStyleBackColor = true;
             this.volver.Click += new System.EventHandler(this.volver_Click);
             // 
-            // Alta
+            // Alta_o_Modificacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -282,8 +283,9 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
-            this.Name = "Alta";
+            this.Name = "Alta_o_Modificacion";
             this.Text = "Alta de Cliente";
+            this.Load += new System.EventHandler(this.Alta_o_Modificacion_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -8,13 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace UberFrba.Abm_Turno
+namespace UberFrba.Abm_Automovil
 {
     public partial class Modificacion : Form
     {
         public Modificacion()
         {
             InitializeComponent();
+        }
+
+        private void Modificacion_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

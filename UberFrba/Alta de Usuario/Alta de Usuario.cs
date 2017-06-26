@@ -38,6 +38,13 @@ namespace UberFrba.Alta_de_Usuario
 
         }
 
+        private void volver_Click(object sender, EventArgs e)
+        {
+            Form menu = new Menu.Menu(this.username, this.rol);
+            menu.Show();
+            this.Close();
+        }
+
        
 
     }

@@ -15,17 +15,13 @@ namespace UberFrba.Abm_Cliente
         private string username;
         private string rol;
 
-        public Alta()
-        {
-            
-        }
-
         public Alta(string username, string rol)
         {
             InitializeComponent();
             this.username = username;
             this.rol = rol;
         }
+
 
         private void label1_Click(object sender, EventArgs e)
         {
@@ -42,6 +38,17 @@ namespace UberFrba.Abm_Cliente
             Form menu = new Menu.Menu(this.username, this.rol);
             menu.Show();
             this.Close();
+        }
+
+        private void Alta_o_Modificacion_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (!puedeDarDeAlta) { /* hacer update */}
+            else { /*hacer insert*/ }
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace UberFrba.Abm_Turno
 {
-    partial class Alta
+    partial class Alta_o_Modificacion
     {
         /// <summary>
         /// Required designer variable.
@@ -35,7 +35,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.textBox4 = new System.Windows.Forms.TextBox();
@@ -107,19 +106,9 @@
             this.textBox2.Size = new System.Drawing.Size(223, 20);
             this.textBox2.TabIndex = 7;
             // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(50, 232);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(73, 17);
-            this.checkBox1.TabIndex = 11;
-            this.checkBox1.Text = "Habilitado";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(270, 275);
+            this.button1.Location = new System.Drawing.Point(250, 232);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 12;
@@ -128,7 +117,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(166, 275);
+            this.button2.Location = new System.Drawing.Point(146, 232);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 13;
@@ -166,24 +155,24 @@
             // 
             // volver
             // 
-            this.volver.Location = new System.Drawing.Point(72, 275);
+            this.volver.Location = new System.Drawing.Point(52, 232);
             this.volver.Name = "volver";
             this.volver.Size = new System.Drawing.Size(70, 23);
             this.volver.TabIndex = 16;
             this.volver.Text = "Volver";
             this.volver.UseVisualStyleBackColor = true;
+            this.volver.Click += new System.EventHandler(this.volver_Click);
             // 
-            // Alta
+            // Alta_o_Modificacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(395, 323);
+            this.ClientSize = new System.Drawing.Size(395, 277);
             this.Controls.Add(this.volver);
             this.Controls.Add(this.textBox5);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.textBox4);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.textBox2);
@@ -193,9 +182,9 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Name = "Alta";
+            this.Name = "Alta_o_Modificacion";
             this.Text = "Alta de Turno";
-            this.Load += new System.EventHandler(this.Alta_Load);
+            this.Load += new System.EventHandler(this.Alta_o_Modificacion_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -210,7 +199,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TextBox textBox4;
